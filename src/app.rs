@@ -1,0 +1,112 @@
+use makepad_widgets::*;
+
+live_design! {
+    import makepad_widgets::base::*;
+    import makepad_widgets::theme_desktop_dark::*;
+
+    Cell = <View> {
+        flow: Down
+        height: Fit
+
+        label = <Label> {
+            width: Fill,
+            height: Fit,
+            text: "Hello",
+            draw_text: {
+                color: #1E90FF,
+                wrap: Word,
+                text_style: {
+                    font_size: 11.0,
+                }
+            }
+        }
+    }
+
+    EmptyCell = <View> {
+        width: Fill,
+        height: Fit
+    }
+
+    Row = <View> {
+        flow: Right
+        spacing: 15.0
+        height: 80.0
+    }
+
+    Grid = <View> {
+        flow: Down
+        spacing: 15.0
+        height: Fit
+
+        padding: 5.0
+    }
+
+    App = {{App}} {
+        ui: <Window> {
+            window: {position: vec2(0, 0), inner_size: vec2(400, 800)},
+            pass: {clear_color: #fff}
+
+            body = {
+                flow: Down
+
+                <View> { width: Fill, height: Fill }
+
+                <Grid> {
+                    <Row> {
+                        <Cell> {label = {text: "圆角矩形\n Rounded Corner"}}
+                        <Cell> {label = {text: "位图图片\n Bitmap Image"}}
+                        <Cell> {label = {text: "点阵文字\n Bitmap Text"}}
+                        <Cell> {label = {text: "矢量文字\n Vector Text"}}
+                    }
+
+                    <Row> {
+                        <Cell> {label = {text: "矢量图片\n Vector Image"}}
+                        <Cell> {label = {text: "全屏模糊\n Full Blur"}}
+                        <Cell> {label = {text: "控件模糊\n Component Blur"}}
+                        <Cell> {label = {text: "毛玻璃效果\n Trans-\n parency"}}
+                    }
+
+                    <Row> {
+                        <Cell> {label = {text: "模糊穿透?\n Fuzzy Blur"}}
+                        <Cell> {label = {text: "渐变模糊?\n Gradient Blur"}}
+                        <Cell> {label = {text: "控件阴影\n Component Shadow"}}
+                        <Cell> {label = {text: "复杂阴影\n Complex Shadow"}}
+                    }
+
+                    <Row> {
+                        <Cell> {label = {text: "背景取色?\n BG Color"}}
+                        <Cell> {label = {text: "控件描边\n Component Stroke"}}
+                        <EmptyCell> {}
+                        <EmptyCell> {}
+                    }
+                }
+
+                <View> { width: Fill, height: Fill }
+            }
+        }
+    }
+}
+
+app_main!(App);
+
+#[derive(Live)]
+pub struct App {
+    #[live]
+    ui: WidgetRef
+}
+
+impl LiveHook for App {
+    fn before_live_design(cx: &mut Cx) {
+        makepad_widgets::live_design(cx);
+    }
+}
+
+impl AppMain for App {
+    fn handle_event(&mut self, cx: &mut Cx, event: &Event) {
+        if let Event::Draw(event) = event {
+            return self.ui.draw_widget_all(&mut Cx2d::new(cx, event));
+        }
+
+        let _actions = self.ui.handle_widget_event(cx, event);
+    }
+}
