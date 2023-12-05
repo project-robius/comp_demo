@@ -6,6 +6,7 @@ live_design! {
     import makepad_widgets::theme_desktop_dark::*;
 
     import crate::rounded_corners::RoundedCorners;
+    import crate::rounded_images::RoundedImages;
     import crate::stack_navigation::*;
 
     Cell = <View> {
@@ -65,7 +66,7 @@ live_design! {
                         <Grid> {
                             <Row> {
                                 rounded_corner_button = <Cell> {label = {text: "圆角矩形\n Rounded Corner"}}
-                                <Cell> {label = {text: "位图图片\n Bitmap Image"}}
+                                rounded_images_button = <Cell> {label = {text: "位图图片\n Bitmap Image"}}
                                 <Cell> {label = {text: "点阵文字\n Bitmap Text"}}
                                 <Cell> {label = {text: "矢量文字\n Vector Text"}}
                             }
@@ -107,6 +108,19 @@ live_design! {
                         }
                         <RoundedCorners> {}
                     }
+
+                    rounded_images = <StackNavigationView> {
+                        header = {
+                            content = {
+                                title_container = {
+                                    title = {
+                                        text: "Rounded Images"
+                                    }
+                                }
+                            }
+                        }
+                        <RoundedImages> {}
+                    }
                 }
             }
         }
@@ -126,6 +140,7 @@ impl LiveHook for App {
         makepad_widgets::live_design(cx);
         crate::stack_navigation::live_design(cx);
         crate::rounded_corners::live_design(cx);
+        crate::rounded_images::live_design(cx);
     }
 }
 
@@ -141,6 +156,14 @@ impl AppMain for App {
             let mut navigation = self.ui.stack_navigation(id!(navigation));
             navigation.show_stack_view_by_id(
                 live_id!(rounded_corners),
+                cx
+            )
+        }
+
+        if self.ui.link_label(id!(rounded_images_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(rounded_images),
                 cx
             )
         }
