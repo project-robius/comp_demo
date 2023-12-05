@@ -1,5 +1,6 @@
 use makepad_widgets::*;
 use crate::stack_navigation::StackNavigationWidgetRefExt;
+use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -96,7 +97,7 @@ live_design! {
                         <View> { width: Fill, height: Fill }
                     }
 
-                    rounded_corners = <StackNavigationView> {
+                    rounded_corners_nav = <StackNavigationView> {
                         header = {
                             content = {
                                 title_container = {
@@ -106,10 +107,10 @@ live_design! {
                                 }
                             }
                         }
-                        <RoundedCorners> {}
+                        rounded_corners_view = <RoundedCorners> {}
                     }
 
-                    rounded_images = <StackNavigationView> {
+                    rounded_images_nav = <StackNavigationView> {
                         header = {
                             content = {
                                 title_container = {
@@ -155,15 +156,21 @@ impl AppMain for App {
         if self.ui.link_label(id!(rounded_corner_button.label)).pressed(&actions) {
             let mut navigation = self.ui.stack_navigation(id!(navigation));
             navigation.show_stack_view_by_id(
-                live_id!(rounded_corners),
+                live_id!(rounded_corners_nav),
                 cx
-            )
+            );
+
+            let rounded_corners = self.ui.view(id!(rounded_corners_view));
+            let mut animated_items = rounded_corners.rounded_corners_item_set(
+                ids!(rounded_corner_item)
+            );
+            animated_items.restart_animation(cx);
         }
 
         if self.ui.link_label(id!(rounded_images_button.label)).pressed(&actions) {
             let mut navigation = self.ui.stack_navigation(id!(navigation));
             navigation.show_stack_view_by_id(
-                live_id!(rounded_images),
+                live_id!(rounded_images_nav),
                 cx
             )
         }

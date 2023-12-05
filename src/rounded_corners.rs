@@ -5,7 +5,7 @@ live_design! {
     import makepad_widgets::base::*;
     import makepad_widgets::theme_desktop_dark::*;
 
-    RoundedCornersCell = {{RoundedCornersCell}} {
+    RoundedCornersItem = {{RoundedCornersItem}} {
         width: Fill,
         height: Fit
 
@@ -38,11 +38,23 @@ live_design! {
         }
     }
 
+    Cell = <View> {
+        width: Fill,
+        height: Fit,
+
+        rounded_corner_item = <RoundedCornersItem> {}
+    }
+
     Row = <View> {
         flow: Right
         spacing: 15.0
         width: Fill
         height: Fit
+
+        <Cell> {}
+        <Cell> {}
+        <Cell> {}
+        <Cell> {}
     }
 
     Grid = <View> {
@@ -62,60 +74,14 @@ live_design! {
         padding: 20.0
 
         <Grid> {
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
-            <Row> {
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-                <RoundedCornersCell> {}
-            }
+            <Row> {}
+            <Row> {}
+            <Row> {}
+            <Row> {}
+            <Row> {}
+            <Row> {}
+            <Row> {}
+            <Row> {}
         }
 
         <View> { width: Fill, height: Fill }
@@ -123,7 +89,7 @@ live_design! {
 }
 
 #[derive(Live)]
-pub struct RoundedCornersCell {
+pub struct RoundedCornersItem {
     #[deref]
     view: View,
 
@@ -131,13 +97,13 @@ pub struct RoundedCornersCell {
     animator: Animator,
 }
 
-impl LiveHook for RoundedCornersCell {
+impl LiveHook for RoundedCornersItem {
     fn before_live_design(cx: &mut Cx) {
-        register_widget!(cx, RoundedCornersCell);
+        register_widget!(cx, RoundedCornersItem);
     }
 }
 
-impl Widget for RoundedCornersCell {
+impl Widget for RoundedCornersItem {
     fn handle_widget_event_with(
         &mut self,
         cx: &mut Cx,
@@ -163,11 +129,34 @@ impl Widget for RoundedCornersCell {
     }
 
     fn draw_walk_widget(&mut self, cx: &mut Cx2d, walk: Walk) -> WidgetDraw {
-        if self.animator.need_init() {
+        if self.animator.need_init() || self.animator_in_state(cx, id!(play.init)) {
             self.animator_play(cx, id!(play.show));
         }
 
         let _ = self.view.draw_walk_widget(cx, walk);
         WidgetDraw::done()
+    }
+}
+
+#[derive(Clone, PartialEq, WidgetRef, Debug)]
+pub struct RoundedCornersItemRef(pub WidgetRef);
+
+impl RoundedCornersItemRef {
+    pub fn restart_animation(&mut self, cx: &mut Cx) {
+        if let Some(mut inner) = self.borrow_mut() {
+            inner.animator_play(cx, id!(play.init));
+            inner.redraw(cx);
+        }
+    }
+}
+
+#[derive(Clone, WidgetSet)]
+pub struct RoundedCornersItemSet(WidgetSet);
+
+impl RoundedCornersItemSet {
+    pub fn restart_animation(&mut self, cx: &mut Cx) {
+        for mut item in self.iter() {
+            item.restart_animation(cx);
+        }
     }
 }
