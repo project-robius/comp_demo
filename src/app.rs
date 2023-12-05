@@ -1,6 +1,7 @@
 use makepad_widgets::*;
 use crate::stack_navigation::StackNavigationWidgetRefExt;
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
+use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -120,7 +121,7 @@ live_design! {
                                 }
                             }
                         }
-                        <RoundedImages> {}
+                        rounded_images_view = <RoundedImages> {}
                     }
                 }
             }
@@ -162,7 +163,7 @@ impl AppMain for App {
 
             let rounded_corners = self.ui.view(id!(rounded_corners_view));
             let mut animated_items = rounded_corners.rounded_corners_item_set(
-                ids!(rounded_corner_item)
+                ids!(rounded_corners_item)
             );
             animated_items.restart_animation(cx);
         }
@@ -172,7 +173,13 @@ impl AppMain for App {
             navigation.show_stack_view_by_id(
                 live_id!(rounded_images_nav),
                 cx
-            )
+            );
+
+            let rounded_images = self.ui.view(id!(rounded_images_view));
+            let mut animated_items = rounded_images.rounded_images_item_set(
+                ids!(rounded_images_item)
+            );
+            animated_items.restart_animation(cx);
         }
     }
 }

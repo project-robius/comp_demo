@@ -42,7 +42,7 @@ live_design! {
         width: Fill,
         height: Fit,
 
-        rounded_corner_item = <RoundedCornersItem> {}
+        rounded_corners_item = <RoundedCornersItem> {}
     }
 
     Row = <View> {
@@ -74,6 +74,7 @@ live_design! {
         padding: 20.0
 
         <Grid> {
+            <Row> {}
             <Row> {}
             <Row> {}
             <Row> {}

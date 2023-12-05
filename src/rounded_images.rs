@@ -4,17 +4,44 @@ use makepad_widgets::*;
 live_design! {
     import makepad_widgets::base::*;
     import makepad_widgets::theme_desktop_dark::*;
+    import makepad_draw::shader::std::*;
 
-    RoundedImagesCell = {{RoundedImagesCell}} {
+    IMG_0 = dep("crate://self/resources/images/0.png")
+    IMG_1 = dep("crate://self/resources/images/1.png")
+    IMG_2 = dep("crate://self/resources/images/2.png")
+    IMG_3 = dep("crate://self/resources/images/3.png")
+    IMG_4 = dep("crate://self/resources/images/4.png")
+    IMG_5 = dep("crate://self/resources/images/5.png")
+    IMG_6 = dep("crate://self/resources/images/6.png")
+    IMG_7 = dep("crate://self/resources/images/7.png")
+    IMG_8 = dep("crate://self/resources/images/8.png")
+    IMG_9 = dep("crate://self/resources/images/9.png")
+    IMG_10 = dep("crate://self/resources/images/10.png")
+    IMG_11 = dep("crate://self/resources/images/11.png")
+
+    RoundedImagesItem = {{RoundedImagesItem}} {
         width: Fill,
         height: Fit
 
-        element = <RoundedView> {
+        element = <Image> {
+            source: (IMG_0),
             width: 60.0,
             height: 60.0,
+
             draw_bg: {
-                color: #4f6,
-                radius: 10.0
+                instance radius: 0.0
+                fn pixel(self) -> vec4 {
+                    let sdf = Sdf2d::viewport(self.pos * self.rect_size);
+                    sdf.box(
+                        1,
+                        1,
+                        self.rect_size.x - 2.0,
+                        self.rect_size.y - 2.0,
+                        max(1.0, self.radius)
+                    )
+                    sdf.fill_keep(self.get_color())
+                    return sdf.result
+                }
             }
         }
 
@@ -38,11 +65,47 @@ live_design! {
         }
     }
 
-    Row = <View> {
+    Cell = <View> {
+        width: Fill,
+        height: Fit,
+
+        rounded_images_item = <RoundedImagesItem> {}
+    }
+
+    Row1 = <View> {
         flow: Right
         spacing: 15.0
         width: Fill
         height: Fit
+
+        <Cell> { rounded_images_item = { element = { source: (IMG_0) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_1) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_2) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_3) } }}
+    }
+
+    Row2 = <View> {
+        flow: Right
+        spacing: 15.0
+        width: Fill
+        height: Fit
+
+        <Cell> { rounded_images_item = { element = { source: (IMG_4) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_5) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_6) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_7) } }}
+    }
+
+    Row3 = <View> {
+        flow: Right
+        spacing: 15.0
+        width: Fill
+        height: Fit
+
+        <Cell> { rounded_images_item = { element = { source: (IMG_8) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_9) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_10) } }}
+        <Cell> { rounded_images_item = { element = { source: (IMG_11) } }}
     }
 
     Grid = <View> {
@@ -62,60 +125,15 @@ live_design! {
         padding: 20.0
 
         <Grid> {
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
-            <Row> {
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-                <RoundedImagesCell> {}
-            }
+            <Row1> {}
+            <Row2> {}
+            <Row3> {}
+            <Row1> {}
+            <Row2> {}
+            <Row3> {}
+            <Row1> {}
+            <Row2> {}
+            <Row3> {}
         }
 
         <View> { width: Fill, height: Fill }
@@ -123,7 +141,7 @@ live_design! {
 }
 
 #[derive(Live)]
-pub struct RoundedImagesCell {
+pub struct RoundedImagesItem {
     #[deref]
     view: View,
 
@@ -131,13 +149,13 @@ pub struct RoundedImagesCell {
     animator: Animator,
 }
 
-impl LiveHook for RoundedImagesCell {
+impl LiveHook for RoundedImagesItem {
     fn before_live_design(cx: &mut Cx) {
-        register_widget!(cx, RoundedImagesCell);
+        register_widget!(cx, RoundedImagesItem);
     }
 }
 
-impl Widget for RoundedImagesCell {
+impl Widget for RoundedImagesItem {
     fn handle_widget_event_with(
         &mut self,
         cx: &mut Cx,
@@ -163,11 +181,34 @@ impl Widget for RoundedImagesCell {
     }
 
     fn draw_walk_widget(&mut self, cx: &mut Cx2d, walk: Walk) -> WidgetDraw {
-        if self.animator.need_init() {
+        if self.animator.need_init() || self.animator_in_state(cx, id!(play.init)) {
             self.animator_play(cx, id!(play.show));
         }
 
         let _ = self.view.draw_walk_widget(cx, walk);
         WidgetDraw::done()
+    }
+}
+
+#[derive(Clone, PartialEq, WidgetRef, Debug)]
+pub struct RoundedImagesItemRef(pub WidgetRef);
+
+impl RoundedImagesItemRef {
+    pub fn restart_animation(&mut self, cx: &mut Cx) {
+        if let Some(mut inner) = self.borrow_mut() {
+            inner.animator_play(cx, id!(play.init));
+            inner.redraw(cx);
+        }
+    }
+}
+
+#[derive(Clone, WidgetSet)]
+pub struct RoundedImagesItemSet(WidgetSet);
+
+impl RoundedImagesItemSet {
+    pub fn restart_animation(&mut self, cx: &mut Cx) {
+        for mut item in self.iter() {
+            item.restart_animation(cx);
+        }
     }
 }
