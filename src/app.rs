@@ -69,29 +69,29 @@ live_design! {
                         
                         <Grid> {
                             <Row> {
-                                rounded_corner_button = <Cell> {label = {text: "圆角矩形\n Rounded Corner"}}
-                                rounded_images_button = <Cell> {label = {text: "位图图片\n Bitmap Image"}}
-                                bitmap_text_button = <Cell> {label = {text: "点阵文字\n Bitmap Text"}}
-                                <Cell> {label = {text: "矢量文字\n Vector Text"}}
+                                rounded_corner_button = <Cell> {label = {text: " 圆角矩形\n Rounded\n Corner"}}
+                                rounded_images_button = <Cell> {label = {text: " 位图图片\n Bitmap\n Image"}}
+                                bitmap_text_button = <Cell> {label = {text: " 点阵文字\n Bitmap Text"}}
+                                <Cell> {label = {text: " 矢量文字\n Vector Text"}}
                             }
                             
                             <Row> {
-                                <Cell> {label = {text: "矢量图片\n Vector Image"}}
-                                <Cell> {label = {text: "全屏模糊\n Full Blur"}}
-                                <Cell> {label = {text: "控件模糊\n Component Blur"}}
-                                <Cell> {label = {text: "毛玻璃效果\n Trans-\n parency"}}
+                                <Cell> {label = {text: " 矢量图片\n Vector\n Image"}}
+                                <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
+                                <Cell> {label = {text: " 控件模糊\n Component Blur"}}
+                                <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
                             }
                             
                             <Row> {
-                                <Cell> {label = {text: "模糊穿透?\n Fuzzy Blur"}}
-                                <Cell> {label = {text: "渐变模糊?\n Gradient Blur"}}
-                                <Cell> {label = {text: "控件阴影\n Component Shadow"}}
-                                <Cell> {label = {text: "复杂阴影\n Complex Shadow"}}
+                                <Cell> {label = {text: " 模糊穿透?\n Fuzzy Blur"}}
+                                <Cell> {label = {text: " 渐变模糊?\n Gradient\n Blur"}}
+                                <Cell> {label = {text: " 控件阴影\n Component\n Shadow"}}
+                                <Cell> {label = {text: " 复杂阴影\n Complex\n Shadow"}}
                             }
                             
                             <Row> {
-                                <Cell> {label = {text: "背景取色?\n BG Color"}}
-                                <Cell> {label = {text: "控件描边\n Component Stroke"}}
+                                <Cell> {label = {text: " 背景取色?\n BG Color"}}
+                                <Cell> {label = {text: " 控件描边\n Component\n Stroke"}}
                                 <EmptyCell> {}
                                 <EmptyCell> {}
                             }
