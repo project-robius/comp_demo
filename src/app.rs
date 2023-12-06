@@ -2,6 +2,7 @@ use makepad_widgets::*;
 use crate::stack_navigation::StackNavigationWidgetRefExt;
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
+use crate::bitmap_text::BitmapTextItemWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -9,6 +10,7 @@ live_design! {
 
     import crate::rounded_corners::RoundedCorners;
     import crate::rounded_images::RoundedImages;
+    import crate::bitmap_text::BitmapText;
     import crate::stack_navigation::*;
 
     Cell = <View> {
@@ -69,7 +71,7 @@ live_design! {
                             <Row> {
                                 rounded_corner_button = <Cell> {label = {text: "圆角矩形\n Rounded Corner"}}
                                 rounded_images_button = <Cell> {label = {text: "位图图片\n Bitmap Image"}}
-                                <Cell> {label = {text: "点阵文字\n Bitmap Text"}}
+                                bitmap_text_button = <Cell> {label = {text: "点阵文字\n Bitmap Text"}}
                                 <Cell> {label = {text: "矢量文字\n Vector Text"}}
                             }
                             
@@ -123,6 +125,19 @@ live_design! {
                         }
                         rounded_images_view = <RoundedImages> {}
                     }
+
+                    bitmap_text_nav = <StackNavigationView> {
+                        header = {
+                            content = {
+                                title_container = {
+                                    title = {
+                                        text: "Bitmap Text"
+                                    }
+                                }
+                            }
+                        }
+                        bitmap_text_view = <BitmapText> {}
+                    }
                 }
             }
         }
@@ -143,6 +158,7 @@ impl LiveHook for App {
         crate::stack_navigation::live_design(cx);
         crate::rounded_corners::live_design(cx);
         crate::rounded_images::live_design(cx);
+        crate::bitmap_text::live_design(cx);
     }
 }
 
@@ -180,6 +196,20 @@ impl AppMain for App {
                 ids!(rounded_images_item)
             );
             animated_items.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(bitmap_text_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(bitmap_text_nav),
+                cx
+            );
+
+            let bitmap_text = self.ui.view(id!(bitmap_text_view));
+            let mut animated_item = bitmap_text.bitmap_text_item(
+                id!(bitmap_text_item)
+            );
+            animated_item.restart_animation(cx);
         }
     }
 }
