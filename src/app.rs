@@ -3,6 +3,7 @@ use crate::stack_navigation::StackNavigationWidgetRefExt;
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
+use crate::transparency::TransparencyWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -11,6 +12,7 @@ live_design! {
     import crate::rounded_corners::RoundedCorners;
     import crate::rounded_images::RoundedImages;
     import crate::bitmap_text::BitmapText;
+    import crate::transparency::Transparency;
     import crate::stack_navigation::*;
 
     Cell = <View> {
@@ -22,7 +24,6 @@ live_design! {
             height: Fit,
             text: "Hello",
             draw_text: {
-                color: #1E90FF,
                 wrap: Word,
                 text_style: {
                     font_size: 11.0,
@@ -60,6 +61,9 @@ live_design! {
             pass: {clear_color: #fff}
 
             body = {
+                width: Fill,
+                height: Fill,
+
                 navigation = <StackNavigation> {
                     root_view = {
                         width: Fill, height: Fill
@@ -79,7 +83,7 @@ live_design! {
                                 <Cell> {label = {text: " 矢量图片\n Vector\n Image"}}
                                 <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
                                 <Cell> {label = {text: " 控件模糊\n Component Blur"}}
-                                <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
+                                transparency_button = <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
                             }
                             
                             <Row> {
@@ -101,42 +105,48 @@ live_design! {
                     }
 
                     rounded_corners_nav = <StackNavigationView> {
-                        header = {
-                            content = {
-                                title_container = {
-                                    title = {
-                                        text: "Rounded Corners"
-                                    }
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "Rounded Corners"
                                 }
-                            }
+                            }}}
+                            rounded_corners_view = <RoundedCorners> {}
                         }
-                        rounded_corners_view = <RoundedCorners> {}
                     }
 
                     rounded_images_nav = <StackNavigationView> {
-                        header = {
-                            content = {
-                                title_container = {
-                                    title = {
-                                        text: "Rounded Images"
-                                    }
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "Bitmap Images"
                                 }
-                            }
+                            }}}
+                            rounded_images_view = <RoundedImages> {}
                         }
-                        rounded_images_view = <RoundedImages> {}
                     }
 
                     bitmap_text_nav = <StackNavigationView> {
-                        header = {
-                            content = {
-                                title_container = {
-                                    title = {
-                                        text: "Bitmap Text"
-                                    }
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "Bitmap Text"
                                 }
-                            }
+                            }}}
+                            bitmap_text_view = <BitmapText> {}
                         }
-                        bitmap_text_view = <BitmapText> {}
+                    }
+
+                    transparency_nav = <StackNavigationView> {
+                        background = { draw_bg: {opacity: 1.0}}
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: " "
+                                }
+                            }}}
+                            transparency_view = <Transparency> {}
+                        }
                     }
                 }
             }
@@ -159,6 +169,7 @@ impl LiveHook for App {
         crate::rounded_corners::live_design(cx);
         crate::rounded_images::live_design(cx);
         crate::bitmap_text::live_design(cx);
+        crate::transparency::live_design(cx);
     }
 }
 
@@ -210,6 +221,17 @@ impl AppMain for App {
                 id!(bitmap_text_item)
             );
             animated_item.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(transparency_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(transparency_nav),
+                cx
+            );
+
+            let mut transparency = self.ui.transparency(id!(transparency_view));
+            transparency.restart_animation(cx);
         }
     }
 }

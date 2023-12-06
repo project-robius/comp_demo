@@ -6,6 +6,8 @@ live_design! {
     import makepad_widgets::theme_desktop_dark::*;
     import makepad_draw::shader::std::*;
 
+    IMG_BACKGROUND = dep("crate://self/resources/images/bg.jpg");
+
     FillerX = <View> { width: Fill, height: Fit }
     FillerY = <View> { width: Fit, height: Fill }
 
@@ -33,10 +35,6 @@ live_design! {
     SimpleHeader = <View> {
         width: Fill , height: Fit, margin: 0
         padding: {bottom: 7., top: 50.}, align: {x: 0.5, y: 0.0}, spacing: 0.0, flow: Overlay
-        show_bg: true
-        draw_bg: {
-            color: #EDEDED
-        }
 
         content = <SimpleHeaderContent> {}
     }
@@ -104,13 +102,30 @@ live_design! {
     StackNavigationView = {{StackNavigationView}} {
         visible: false
         width: Fill, height: Fill
-        flow: Down
+        flow: Overlay
+
         show_bg: true
         draw_bg: {
             color: #fff
         }
 
-        header = <Header> {}
+        background = <Image> {
+            source: (IMG_BACKGROUND),
+            width: Fill,
+            height: Fill,
+
+            draw_bg: {
+                opacity: 0.0
+            }
+        }
+
+        body = <View> {
+            width: Fill,
+            height: Fill,
+            flow: Down,
+
+            header = <Header> {}
+        }
 
         // TBD Adjust this based on actual screen size
         offset: 400.0
@@ -138,7 +153,8 @@ live_design! {
         width: Fill, height: Fill
         flow: Overlay
 
-        root_view = <View> {}
+        root_view = <View> {
+        }
     }
 }
 
