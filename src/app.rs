@@ -4,6 +4,7 @@ use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
+use crate::color::ColorWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -13,6 +14,7 @@ live_design! {
     import crate::rounded_images::RoundedImages;
     import crate::bitmap_text::BitmapText;
     import crate::transparency::Transparency;
+    import crate::color::Color;
     import crate::stack_navigation::*;
 
     Cell = <View> {
@@ -94,7 +96,7 @@ live_design! {
                             }
                             
                             <Row> {
-                                <Cell> {label = {text: " 背景取色?\n BG Color"}}
+                                color_button = <Cell> {label = {text: " 背景取色?\n BG Color"}}
                                 <Cell> {label = {text: " 控件描边\n Component\n Stroke"}}
                                 <EmptyCell> {}
                                 <EmptyCell> {}
@@ -148,6 +150,17 @@ live_design! {
                             transparency_view = <Transparency> {}
                         }
                     }
+
+                    color_nav = <StackNavigationView> {
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "BG Color"
+                                }
+                            }}}
+                            color_view = <Color> {}
+                        }
+                    }
                 }
             }
         }
@@ -170,6 +183,7 @@ impl LiveHook for App {
         crate::rounded_images::live_design(cx);
         crate::bitmap_text::live_design(cx);
         crate::transparency::live_design(cx);
+        crate::color::live_design(cx);
     }
 }
 
@@ -232,6 +246,17 @@ impl AppMain for App {
 
             let mut transparency = self.ui.transparency(id!(transparency_view));
             transparency.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(color_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(color_nav),
+                cx
+            );
+
+            let mut color = self.ui.color(id!(color_view));
+            color.restart_animation(cx);
         }
     }
 }
