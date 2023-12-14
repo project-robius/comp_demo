@@ -89,7 +89,7 @@ live_design! {
     }
 }
 
-#[derive(Live)]
+#[derive(Live, LiveHook, Widget)]
 pub struct RoundedCornersItem {
     #[deref]
     view: View,
@@ -98,49 +98,22 @@ pub struct RoundedCornersItem {
     animator: Animator,
 }
 
-impl LiveHook for RoundedCornersItem {
-    fn before_live_design(cx: &mut Cx) {
-        register_widget!(cx, RoundedCornersItem);
-    }
-}
-
 impl Widget for RoundedCornersItem {
-    fn handle_widget_event_with(
-        &mut self,
-        cx: &mut Cx,
-        event: &Event,
-        dispatch_action: &mut dyn FnMut(&mut Cx, WidgetActionItem),
-    ) {
+    fn handle_event(&mut self, cx: &mut Cx, event: &Event, scope: &mut Scope) {
         if self.animator_handle_event(cx, event).must_redraw() {
             self.view.redraw(cx);
         }
-        self.view.handle_widget_event_with(cx, event, dispatch_action);
+        self.view.handle_event(cx, event, scope);
     }
 
-    fn walk(&mut self, cx: &mut Cx) -> Walk {
-        self.view.walk(cx)
-    }
-
-    fn redraw(&mut self, cx: &mut Cx) {
-        self.view.redraw(cx);
-    }
-
-    fn find_widgets(&mut self, path: &[LiveId], cached: WidgetCache, results: &mut WidgetSet) {
-        self.view.find_widgets(path, cached, results);
-    }
-
-    fn draw_walk_widget(&mut self, cx: &mut Cx2d, walk: Walk) -> WidgetDraw {
+    fn draw_walk(&mut self, cx: &mut Cx2d, scope: &mut Scope, walk: Walk) -> DrawStep {
         if self.animator.need_init() || self.animator_in_state(cx, id!(play.init)) {
             self.animator_play(cx, id!(play.show));
         }
 
-        let _ = self.view.draw_walk_widget(cx, walk);
-        WidgetDraw::done()
+        self.view.draw_walk(cx, scope, walk)
     }
 }
-
-#[derive(Clone, PartialEq, WidgetRef, Debug)]
-pub struct RoundedCornersItemRef(pub WidgetRef);
 
 impl RoundedCornersItemRef {
     pub fn restart_animation(&mut self, cx: &mut Cx) {
@@ -150,9 +123,6 @@ impl RoundedCornersItemRef {
         }
     }
 }
-
-#[derive(Clone, WidgetSet)]
-pub struct RoundedCornersItemSet(WidgetSet);
 
 impl RoundedCornersItemSet {
     pub fn restart_animation(&mut self, cx: &mut Cx) {

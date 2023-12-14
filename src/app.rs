@@ -169,14 +169,14 @@ live_design! {
 
 app_main!(App);
 
-#[derive(Live)]
+#[derive(Live, LiveHook)]
 pub struct App {
     #[live]
     ui: WidgetRef,
 }
 
-impl LiveHook for App {
-    fn before_live_design(cx: &mut Cx) {
+impl LiveRegister for App {
+    fn live_register(cx: &mut Cx) {
         makepad_widgets::live_design(cx);
         crate::stack_navigation::live_design(cx);
         crate::rounded_corners::live_design(cx);
@@ -189,12 +189,13 @@ impl LiveHook for App {
 
 impl AppMain for App {
     fn handle_event(&mut self, cx: &mut Cx, event: &Event) {
-        if let Event::Draw(event) = event {
-            return self.ui.draw_widget_all(&mut Cx2d::new(cx, event));
-        }
-        
-        let actions = self.ui.handle_widget_event(cx, event);
+        self.match_event(cx, event);
+        self.ui.handle_event(cx, event, &mut Scope::empty());
+    }
+}
 
+impl MatchEvent for App{
+    fn handle_actions(&mut self, cx: &mut Cx, actions:&Actions){
         if self.ui.link_label(id!(rounded_corner_button.label)).pressed(&actions) {
             let mut navigation = self.ui.stack_navigation(id!(navigation));
             navigation.show_stack_view_by_id(

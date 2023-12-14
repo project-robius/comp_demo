@@ -98,7 +98,7 @@ live_design! {
     }
 }
 
-#[derive(Live)]
+#[derive(Live, LiveHook, Widget)]
 pub struct Color {
     #[deref]
     view: View,
@@ -110,59 +110,22 @@ pub struct Color {
     timer: Timer,
 }
 
-impl LiveHook for Color {
-    fn before_live_design(cx: &mut Cx) {
-        register_widget!(cx, Color);
-    }
-
-    fn after_new_from_doc(&mut self, cx: &mut Cx) {
-        self.change_color(cx);
-    }
-}
-
 impl Widget for Color {
-    fn handle_widget_event_with(
-        &mut self,
-        cx: &mut Cx,
-        event: &Event,
-        dispatch_action: &mut dyn FnMut(&mut Cx, WidgetActionItem),
-    ) {
+    fn handle_event(&mut self, cx: &mut Cx, event: &Event, scope: &mut Scope) {
         if self.timer.is_event(event).is_some() {
             self.change_color(cx);
             self.timer = cx.start_timeout(self.color_update_timeout)
         }
 
-        //self.view.handle_widget_event_with(cx, event, dispatch_action);
-
-        let mut actions = vec![];
-        for a in self.view.handle_widget_event(cx, event) {
-            actions.push(a);
-        }
+        let actions = cx.capture_actions(|cx| self.view.handle_event(cx, event, scope));
 
         if self.button(id!(button)).clicked(&actions) {
             self.change_color(cx);
         }
-
-        for action in actions.into_iter() {
-            dispatch_action(cx, action);
-        }
     }
 
-    fn walk(&mut self, cx: &mut Cx) -> Walk {
-        self.view.walk(cx)
-    }
-
-    fn redraw(&mut self, cx: &mut Cx) {
-        self.view.redraw(cx);
-    }
-
-    fn find_widgets(&mut self, path: &[LiveId], cached: WidgetCache, results: &mut WidgetSet) {
-        self.view.find_widgets(path, cached, results);
-    }
-
-    fn draw_walk_widget(&mut self, cx: &mut Cx2d, walk: Walk) -> WidgetDraw {
-        let _ = self.view.draw_walk_widget(cx, walk);
-        WidgetDraw::done()
+    fn draw_walk(&mut self, cx: &mut Cx2d, scope: &mut Scope, walk: Walk) -> DrawStep {
+        self.view.draw_walk(cx, scope, walk)
     }
 }
 
@@ -188,9 +151,6 @@ impl Color {
         self.view.redraw(cx);
     }
 }
-
-#[derive(Clone, PartialEq, WidgetRef, Debug)]
-pub struct ColorRef(pub WidgetRef);
 
 impl ColorRef {
     pub fn restart_animation(&mut self, cx: &mut Cx) {
