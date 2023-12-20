@@ -4,4 +4,5 @@ mod rounded_corners;
 mod rounded_images;
 mod bitmap_text;
 mod transparency;
+mod component_blur;
 mod color;

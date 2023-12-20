@@ -4,6 +4,7 @@ use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
+use crate::component_blur::BlurImageSetWidgetRefExt;
 use crate::color::ColorWidgetRefExt;
 
 live_design! {
@@ -15,7 +16,11 @@ live_design! {
     import crate::bitmap_text::BitmapText;
     import crate::transparency::Transparency;
     import crate::color::Color;
+    import crate::component_blur::ComponentBlur;
     import crate::stack_navigation::*;
+
+    import makepad_draw::shader::std::*;
+    IMG_0 = dep("crate://self/resources/images/0.png")
 
     Cell = <View> {
         flow: Down
@@ -84,7 +89,7 @@ live_design! {
                             <Row> {
                                 <Cell> {label = {text: " 矢量图片\n Vector\n Image"}}
                                 <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
-                                <Cell> {label = {text: " 控件模糊\n Component Blur"}}
+                                component_blur_button = <Cell> {label = {text: " 控件模糊\n Component\n Blur"}}
                                 transparency_button = <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
                             }
                             
@@ -161,6 +166,17 @@ live_design! {
                             color_view = <Color> {}
                         }
                     }
+
+                    component_blur_nav = <StackNavigationView> {
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "Component Blur"
+                                }
+                            }}}
+                            component_blur_view = <ComponentBlur> {}
+                        }
+                    }
                 }
             }
         }
@@ -183,6 +199,7 @@ impl LiveRegister for App {
         crate::rounded_images::live_design(cx);
         crate::bitmap_text::live_design(cx);
         crate::transparency::live_design(cx);
+        crate::component_blur::live_design(cx);
         crate::color::live_design(cx);
     }
 }
@@ -247,6 +264,20 @@ impl MatchEvent for App{
 
             let mut transparency = self.ui.transparency(id!(transparency_view));
             transparency.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(component_blur_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(component_blur_nav),
+                cx
+            );
+
+            let component_blur = self.ui.view(id!(component_blur_view));
+            let mut animated_items = component_blur.blur_image_set(
+                ids!(blur_image_item)
+            );
+            animated_items.restart_animation(cx);
         }
 
         if self.ui.link_label(id!(color_button.label)).pressed(&actions) {
