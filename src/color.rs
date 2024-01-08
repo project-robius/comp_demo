@@ -103,7 +103,7 @@ pub struct Color {
     #[deref]
     view: View,
 
-    #[live(1.0)]
+    #[live(1000.0)]
     color_update_timeout: f64,
 
     #[rust]

@@ -7,11 +7,11 @@ live_design! {
 
     IMG_0 = dep("crate://self/resources/images/0.png")
     IMG_1 = dep("crate://self/resources/images/1.png")
-    IMG_2 = dep("crate://self/resources/images/2.png")
-    IMG_3 = dep("crate://self/resources/images/3.png")
+    IMG_2 = dep("crate://self/resources/images/3.png")
+    IMG_3 = dep("crate://self/resources/images/4.png")
 
     BlurImage = {{BlurImage}} {
-        blur_image_item = <Image> {
+        image: <Image> {
             width: 60.0,
             height: 60.0,
 
@@ -90,11 +90,11 @@ live_design! {
                 show = {
                     redraw: true,
                     from: {all: BounceLoop {duration: 2.0, end: 1.0}}
-                    apply: { blur_image_item = { draw_bg: {blur_radius: 10.0}} }
+                    apply: { image: { draw_bg: {blur_radius: 10.0}} }
                 }
                 init = {
                     from: {all: Snap}
-                    apply: { blur_image_item = { draw_bg: {blur_radius: 3.0}} }
+                    apply: { image: { draw_bg: {blur_radius: 3.0}} }
                 }
             }
         }
@@ -102,20 +102,40 @@ live_design! {
 
     ComponentBlur = <View> {
         <View> {
+            flow: Right
+
             width: Fill,
-            height: 300,
+            height: 100.0,
             padding: 20.0,
-            <BlurImage> {
-                blur_image_item = { source: (IMG_0) }
+            margin: 0.0
+
+            <View> {
+                width: Fill,
+                align: {x: 0.5}
+                blur_image_item = <BlurImage> {
+                    image: { source: (IMG_0) }
+                }
             }
-            <BlurImage> {
-                blur_image_item = { source: (IMG_1) }
+            <View> {
+                width: Fill,
+                align: {x: 0.5}
+                blur_image_item = <BlurImage> {
+                    image: { source: (IMG_1) }
+                }
             }
-            <BlurImage> {
-                blur_image_item = { source: (IMG_2) }
+            <View> {
+                width: Fill,
+                align: {x: 0.5}
+                blur_image_item = <BlurImage> {
+                    image: { source: (IMG_2) }
+                }
             }
-            <BlurImage> {
-                blur_image_item = { source: (IMG_3) }
+            <View> {
+                width: Fill,
+                align: {x: 0.5}
+                blur_image_item = <BlurImage> {
+                    image: { source: (IMG_3) }
+                }
             }
         }
     }
@@ -123,8 +143,8 @@ live_design! {
 
 #[derive(Live, LiveHook, Widget)]
 pub struct BlurImage {
-    #[deref]
-    view: View,
+    #[live] #[wrap]
+    image: Image,
 
     #[animator]
     animator: Animator,
@@ -133,9 +153,9 @@ pub struct BlurImage {
 impl Widget for BlurImage {
     fn handle_event(&mut self, cx: &mut Cx, event: &Event, scope: &mut Scope) {
         if self.animator_handle_event(cx, event).must_redraw() {
-            self.view.redraw(cx);
+            self.image.redraw(cx);
         }
-        self.view.handle_event(cx, event, scope);
+        self.image.handle_event(cx, event, scope);
     }
 
     fn draw_walk(&mut self, cx: &mut Cx2d, scope: &mut Scope, walk: Walk) -> DrawStep {
@@ -143,7 +163,7 @@ impl Widget for BlurImage {
             self.animator_play(cx, id!(play.show));
         }
 
-        self.view.draw_walk(cx, scope, walk)
+        self.image.draw_walk(cx, walk)
     }
 }
 

@@ -168,10 +168,11 @@ live_design! {
                     }
 
                     component_blur_nav = <StackNavigationView> {
+                        background = { draw_bg: {opacity: 1.0}}
                         body = {
                             header = { content = { title_container = {
                                 title = {
-                                    text: "Component Blur"
+                                    text: " "
                                 }
                             }}}
                             component_blur_view = <ComponentBlur> {}
