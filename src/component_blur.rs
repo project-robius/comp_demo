@@ -61,7 +61,6 @@ live_design! {
 
                 fn pixel(self) -> vec4 {
                     let m = 16.0;
-                    let n = 33.0;
 
                     let radius = self.blur_radius / 1000.0 * self.rect_size.x;
 
@@ -69,14 +68,14 @@ live_design! {
                     let pos = self.pos;
                     let i = 0.0;
                     let j = 0.0;
-                    for step in 0..33 {
+                    for step in 0..8 {
                         j = 0.0;
-                        for b in 0..33 {
-                            pos = self.pos + vec2((i - m) / self.rect_size.x, (j - m) / self.rect_size.y) * radius;
-                            color += self.get_color_pos(pos) * coeffs(i) * coeffs(j);
-                            j += 1.0;
+                        for b in 0..8 {
+                            pos = self.pos + vec2((i - 16.0) / self.rect_size.x, (j - 16.0) / self.rect_size.y) * radius;
+                            color += self.get_color_pos(pos) * coeffs(i) * coeffs(j) * 17.015625;
+                            j += 4.0;
                         }
-                        i += 1.0;
+                        i += 4.0;
                     }
                     
                     return color;
@@ -90,11 +89,11 @@ live_design! {
                 show = {
                     redraw: true,
                     from: {all: BounceLoop {duration: 2.0, end: 1.0}}
-                    apply: { image: { draw_bg: {blur_radius: 10.0}} }
+                    apply: { image: { draw_bg: {blur_radius: 8.0}} }
                 }
                 init = {
                     from: {all: Snap}
-                    apply: { image: { draw_bg: {blur_radius: 3.0}} }
+                    apply: { image: { draw_bg: {blur_radius: 2.0}} }
                 }
             }
         }
