@@ -66,6 +66,7 @@ live_design! {
         ui: <Window> {
             window: {position: vec2(0, 0), inner_size: vec2(400, 800)},
             pass: {clear_color: #fff}
+            show_performance_view: true
 
             body = {
                 width: Fill,
