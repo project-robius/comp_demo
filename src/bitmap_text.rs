@@ -29,8 +29,6 @@ live_design! {
                     return self.clip_and_transform_vertex(self.rect_pos, self.rect_size)
                 }
                 fn pixel(self) -> vec4 {
-                    //let traslation = 0.5 - 1.0 / ((1.0 / self.image_scale) * 2.0);
-                    //let traslation = 0.5 - 1.0 / (self.image_scale * 2.0);
                     return sample2d_rt(self.image, self.pos * self.image_scale);
                 }
             }
@@ -85,8 +83,6 @@ live_design! {
         padding: 5.0
 
         bitmap_text_item = <BitmapTextItem> {}
-
-        // <View> { width: Fill, height: Fill }
     }
 }
 

@@ -4,7 +4,7 @@ use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
-use crate::component_blur::BlurImageSetWidgetRefExt;
+use crate::component_blur::{BlurImageSetWidgetRefExt, BlurBitmapTextItemWidgetRefExt};
 use crate::color::ColorWidgetRefExt;
 
 live_design! {
@@ -278,6 +278,11 @@ impl MatchEvent for App{
             let component_blur = self.ui.view(id!(component_blur_view));
             let mut animated_items = component_blur.blur_image_set(
                 ids!(blur_image_item)
+            );
+            animated_items.restart_animation(cx);
+
+            let mut animated_items = component_blur.blur_bitmap_text_item(
+                id!(blur_bitmap_text_item)
             );
             animated_items.restart_animation(cx);
         }
