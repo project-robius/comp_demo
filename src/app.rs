@@ -3,6 +3,7 @@ use crate::stack_navigation::StackNavigationWidgetRefExt;
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
+use crate::vector_text::VectorTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
 use crate::component_blur::{BlurImageSetWidgetRefExt, BlurBitmapTextItemWidgetRefExt};
 use crate::color::ColorWidgetRefExt;
@@ -14,6 +15,7 @@ live_design! {
     import crate::rounded_corners::RoundedCorners;
     import crate::rounded_images::RoundedImages;
     import crate::bitmap_text::BitmapText;
+    import crate::vector_text::VectorText;
     import crate::transparency::Transparency;
     import crate::color::Color;
     import crate::component_blur::ComponentBlur;
@@ -66,7 +68,7 @@ live_design! {
         ui: <Window> {
             window: {position: vec2(0, 0), inner_size: vec2(400, 800)},
             pass: {clear_color: #fff}
-            show_performance_view: true
+            //show_performance_view: true
 
             body = {
                 width: Fill,
@@ -84,7 +86,7 @@ live_design! {
                                 rounded_corner_button = <Cell> {label = {text: " 圆角矩形\n Rounded\n Corner"}}
                                 rounded_images_button = <Cell> {label = {text: " 位图图片\n Bitmap\n Image"}}
                                 bitmap_text_button = <Cell> {label = {text: " 点阵文字\n Bitmap Text"}}
-                                <Cell> {label = {text: " 矢量文字\n Vector Text"}}
+                                vector_text_button = <Cell> {label = {text: " 矢量文字\n Vector Text"}}
                             }
                             
                             <Row> {
@@ -145,6 +147,17 @@ live_design! {
                         }
                     }
 
+                    vector_text_nav = <StackNavigationView> {
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: "Vector Text"
+                                }
+                            }}}
+                            vector_text_view = <VectorText> {}
+                        }
+                    }
+
                     transparency_nav = <StackNavigationView> {
                         background = { draw_bg: {opacity: 1.0}}
                         body = {
@@ -200,6 +213,7 @@ impl LiveRegister for App {
         crate::rounded_corners::live_design(cx);
         crate::rounded_images::live_design(cx);
         crate::bitmap_text::live_design(cx);
+        crate::vector_text::live_design(cx);
         crate::transparency::live_design(cx);
         crate::component_blur::live_design(cx);
         crate::color::live_design(cx);
@@ -253,6 +267,20 @@ impl MatchEvent for App{
             let bitmap_text = self.ui.view(id!(bitmap_text_view));
             let mut animated_item = bitmap_text.bitmap_text_item(
                 id!(bitmap_text_item)
+            );
+            animated_item.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(vector_text_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(vector_text_nav),
+                cx
+            );
+
+            let vector_text = self.ui.view(id!(vector_text_view));
+            let mut animated_item = vector_text.vector_text_item(
+                id!(vector_text_item)
             );
             animated_item.restart_animation(cx);
         }
