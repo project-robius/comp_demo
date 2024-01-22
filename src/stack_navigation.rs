@@ -124,8 +124,10 @@ live_design! {
             height: Fill,
             flow: Down,
 
-            header = <Header> {}
+            margin: {top: 60.0},
         }
+
+        header = <Header> {}
 
         // TBD Adjust this based on actual screen size
         offset: 400.0

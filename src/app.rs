@@ -119,92 +119,101 @@ live_design! {
                     }
 
                     rounded_corners_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Rounded Corners"
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: "Rounded Corners"
-                                }
-                            }}}
                             rounded_corners_view = <RoundedCorners> {}
                         }
                     }
 
                     rounded_images_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Bitmap Images"
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: "Bitmap Images"
-                                }
-                            }}}
                             rounded_images_view = <RoundedImages> {}
                         }
                     }
 
                     bitmap_text_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Bitmap Text"
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: "Bitmap Text"
-                                }
-                            }}}
                             bitmap_text_view = <BitmapText> {}
                         }
                     }
 
                     vector_text_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Vector Text"
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: "Vector Text"
-                                }
-                            }}}
                             vector_text_view = <VectorText> {}
                         }
                     }
 
                     transparency_nav = <StackNavigationView> {
                         background = { draw_bg: {opacity: 1.0}}
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Transparency"
+                                draw_text: {
+                                    color: #fff
+                                } 
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: " "
-                                }
-                            }}}
                             transparency_view = <Transparency> {}
                         }
                     }
 
                     color_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "BG Color"
+                            }
+                        }}}
                         body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: "BG Color"
-                                }
-                            }}}
                             color_view = <Color> {}
                         }
                     }
 
                     full_blur_nav = <StackNavigationView> {
-                        background = { draw_bg: {opacity: 1.0}}
-                        body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: " "
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Full Blur",
+                                draw_text: {
+                                    color: #fff
                                 }
-                            }}}
+                            }
+                        }}}
+                        body = {
+                            margin: 0.0
                             full_blur_view = <FullBlur> {}
                         }
                     }
 
                     component_blur_nav = <StackNavigationView> {
                         background = { draw_bg: {opacity: 1.0}}
-                        body = {
-                            header = { content = { title_container = {
-                                title = {
-                                    text: " "
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Component Blur",
+                                draw_text: {
+                                    color: #fff
                                 }
-                            }}}
+                            }
+                        }}}
+                        body = {
                             component_blur_view = <ComponentBlur> {}
                         }
                     }
