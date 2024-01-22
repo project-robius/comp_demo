@@ -318,11 +318,4 @@ impl StackNavigationRef {
             inner.show_stack_view_by_id(stack_view_id, cx);
         }
     }
-
-    pub fn set_title(&self, stack_view_id: LiveId, title: &str) {
-        if let Some(mut inner) = self.borrow_mut() {
-            let stack_view_ref = inner.stack_navigation_view(&[stack_view_id]);
-            stack_view_ref.label(id!(title)).set_text(title);
-        }
-    }
 }
