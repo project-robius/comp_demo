@@ -1,11 +1,14 @@
 use makepad_widgets::*;
+
 use crate::stack_navigation::StackNavigationWidgetRefExt;
+use crate::blur_image::{BlurImageWidgetRefExt, BlurImageSetWidgetRefExt};
+
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
 use crate::rounded_images::RoundedImagesItemSetWidgetRefExt;
 use crate::bitmap_text::BitmapTextItemWidgetRefExt;
 use crate::vector_text::VectorTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
-use crate::component_blur::{BlurImageSetWidgetRefExt, BlurBitmapTextItemWidgetRefExt};
+use crate::component_blur::BlurBitmapTextItemWidgetRefExt;
 use crate::color::ColorWidgetRefExt;
 
 live_design! {
@@ -19,6 +22,7 @@ live_design! {
     import crate::transparency::Transparency;
     import crate::color::Color;
     import crate::component_blur::ComponentBlur;
+    import crate::full_blur::FullBlur;
     import crate::stack_navigation::*;
 
     import makepad_draw::shader::std::*;
@@ -91,7 +95,7 @@ live_design! {
                             
                             <Row> {
                                 <Cell> {label = {text: " 矢量图片\n Vector\n Image"}}
-                                <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
+                                full_blur_button = <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
                                 component_blur_button = <Cell> {label = {text: " 控件模糊\n Component\n Blur"}}
                                 transparency_button = <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
                             }
@@ -181,6 +185,18 @@ live_design! {
                         }
                     }
 
+                    full_blur_nav = <StackNavigationView> {
+                        background = { draw_bg: {opacity: 1.0}}
+                        body = {
+                            header = { content = { title_container = {
+                                title = {
+                                    text: " "
+                                }
+                            }}}
+                            full_blur_view = <FullBlur> {}
+                        }
+                    }
+
                     component_blur_nav = <StackNavigationView> {
                         background = { draw_bg: {opacity: 1.0}}
                         body = {
@@ -209,12 +225,16 @@ pub struct App {
 impl LiveRegister for App {
     fn live_register(cx: &mut Cx) {
         makepad_widgets::live_design(cx);
+
         crate::stack_navigation::live_design(cx);
+        crate::blur_image::live_design(cx);
+
         crate::rounded_corners::live_design(cx);
         crate::rounded_images::live_design(cx);
         crate::bitmap_text::live_design(cx);
         crate::vector_text::live_design(cx);
         crate::transparency::live_design(cx);
+        crate::full_blur::live_design(cx);
         crate::component_blur::live_design(cx);
         crate::color::live_design(cx);
     }
@@ -296,6 +316,20 @@ impl MatchEvent for App{
             transparency.restart_animation(cx);
         }
 
+        if self.ui.link_label(id!(full_blur_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(full_blur_nav),
+                cx
+            );
+
+            let full_blur_view = self.ui.view(id!(full_blur_view));
+            let mut animated_item = full_blur_view.blur_image(
+                id!(blur_image_item)
+            );
+            animated_item.restart_animation(cx);
+        }
+
         if self.ui.link_label(id!(component_blur_button.label)).pressed(&actions) {
             let mut navigation = self.ui.stack_navigation(id!(navigation));
             navigation.show_stack_view_by_id(
@@ -303,13 +337,13 @@ impl MatchEvent for App{
                 cx
             );
 
-            let component_blur = self.ui.view(id!(component_blur_view));
-            let mut animated_items = component_blur.blur_image_set(
+            let component_blur_view = self.ui.view(id!(component_blur_view));
+            let mut animated_items = component_blur_view.blur_image_set(
                 ids!(blur_image_item)
             );
             animated_items.restart_animation(cx);
 
-            let mut animated_items = component_blur.blur_bitmap_text_item(
+            let mut animated_items = component_blur_view.blur_bitmap_text_item(
                 id!(blur_bitmap_text_item)
             );
             animated_items.restart_animation(cx);
