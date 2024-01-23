@@ -20,8 +20,8 @@ live_design! {
     IMG_10 = dep("crate://self/resources/images/10.png")
     IMG_11 = dep("crate://self/resources/images/11.png")
 
-    STD = 1.5
-    SIZE = 3.0
+    SHADOW_BLUR_SIZE = 3.0
+    SHADOW_BLUR_STD = 1.5
 
     ComponentShadowItem = {{ComponentShadowItem}} {
         width: 100.0,
@@ -34,20 +34,20 @@ live_design! {
         step4 = <BlurStage>{
             width: Fill,
             height: Fill,
-            draw_bg:{blury: 0.0, blurx: 10.0, blursize: (SIZE), blurstd: (STD)}
+            draw_bg:{blury: 0.0, blurx: 10.0, blursize: (SHADOW_BLUR_SIZE), blurstd: (SHADOW_BLUR_STD)}
             step3 = <BlurStage>{
                 width: Fill,
                 height: Fill,
-                draw_bg:{blury: 10.0, blurx: 0.0, blursize: (SIZE), blurstd: (STD)}
+                draw_bg:{blury: 10.0, blurx: 0.0, blursize: (SHADOW_BLUR_SIZE), blurstd: (SHADOW_BLUR_STD)}
                 step2 = <BlurStage>{
                     width: Fill,
                     height: Fill,
-                    draw_bg:{blury: 7.07, blurx: 7.07, blursize: (SIZE), blurstd: (STD)}
+                    draw_bg:{blury: 7.07, blurx: 7.07, blursize: (SHADOW_BLUR_SIZE), blurstd: (SHADOW_BLUR_STD)}
                     step1 = <BlurStage>{
                         width: Fill,
                         height: Fill,
     
-                        draw_bg:{blury: -7.07, blurx: 7.07, blursize: (SIZE), blurstd: (STD)}
+                        draw_bg:{blury: -7.07, blurx: 7.07, blursize: (SHADOW_BLUR_SIZE), blurstd: (SHADOW_BLUR_STD)}
                         
                         align: {x: 0.5, y: 0.5}
                         shadow = <RoundedView> {

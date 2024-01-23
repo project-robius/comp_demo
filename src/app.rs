@@ -10,6 +10,7 @@ use crate::vector_text::VectorTextItemWidgetRefExt;
 use crate::transparency::TransparencyWidgetRefExt;
 use crate::component_blur::BlurBitmapTextItemWidgetRefExt;
 use crate::component_shadow::ComponentShadowItemSetWidgetRefExt;
+use crate::complex_shadow::ComplexShadowItemWidgetRefExt;
 use crate::color::ColorWidgetRefExt;
 
 live_design! {
@@ -25,6 +26,7 @@ live_design! {
     import crate::component_blur::ComponentBlur;
     import crate::full_blur::FullBlur;
     import crate::component_shadow::ComponentShadow;
+    import crate::complex_shadow::ComplexShadow;
     import crate::stack_navigation::*;
 
     import makepad_draw::shader::std::*;
@@ -106,7 +108,7 @@ live_design! {
                                 <Cell> {label = {text: " 模糊穿透?\n Fuzzy Blur"}}
                                 <Cell> {label = {text: " 渐变模糊?\n Gradient\n Blur"}}
                                 component_shadow_button = <Cell> {label = {text: " 控件阴影\n Component\n Shadow"}}
-                                <Cell> {label = {text: " 复杂阴影\n Complex\n Shadow"}}
+                                complex_shadow_button = <Cell> {label = {text: " 复杂阴影\n Complex\n Shadow"}}
                             }
                             
                             <Row> {
@@ -230,6 +232,17 @@ live_design! {
                             component_shadow_view = <ComponentShadow> {}
                         }
                     }
+
+                    complex_shadow_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Complex Shadow"
+                            }
+                        }}}
+                        body = {
+                            complex_shadow_view = <ComplexShadow> {}
+                        }
+                    }
                 }
             }
         }
@@ -259,6 +272,7 @@ impl LiveRegister for App {
         crate::full_blur::live_design(cx);
         crate::component_blur::live_design(cx);
         crate::component_shadow::live_design(cx);
+        crate::complex_shadow::live_design(cx);
         crate::color::live_design(cx);
     }
 }
@@ -384,6 +398,20 @@ impl MatchEvent for App{
                 ids!(component_shadow_item)
             );
             animated_items.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(complex_shadow_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(complex_shadow_nav),
+                cx
+            );
+
+            let complex_shadow_view = self.ui.view(id!(complex_shadow_view));
+            let mut animated_item = complex_shadow_view.complex_shadow_item(
+                id!(complex_shadow_item)
+            );
+            animated_item.restart_animation(cx);
         }
 
         if self.ui.link_label(id!(color_button.label)).pressed(&actions) {
