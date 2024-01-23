@@ -12,4 +12,5 @@ mod vector_text;
 mod transparency;
 mod full_blur;
 mod component_blur;
+mod component_shadow;
 mod color;
