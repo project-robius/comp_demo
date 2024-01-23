@@ -105,8 +105,8 @@ live_design! {
                             }
                             
                             <Row> {
-                                <Cell> {label = {text: " 模糊穿透?\n Fuzzy Blur"}}
-                                <Cell> {label = {text: " 渐变模糊?\n Gradient\n Blur"}}
+                                fuzzy_blur_button = <Cell> {label = {text: " 模糊穿透?\n Fuzzy Blur"}}
+                                gradient_blur_button = <Cell> {label = {text: " 渐变模糊?\n Gradient\n Blur"}}
                                 component_shadow_button = <Cell> {label = {text: " 控件阴影\n Component\n Shadow"}}
                                 complex_shadow_button = <Cell> {label = {text: " 复杂阴影\n Complex\n Shadow"}}
                             }
@@ -242,6 +242,15 @@ live_design! {
                         body = {
                             complex_shadow_view = <ComplexShadow> {}
                         }
+                    }
+
+                    only_image_nav = <StackNavigationView> {
+                        background = { draw_bg: {opacity: 1.0}}
+                        header = { content = { title_container = {
+                            title = {
+                                text: " ",
+                            }
+                        }}}
                     }
                 }
             }
@@ -423,6 +432,16 @@ impl MatchEvent for App{
 
             let mut color = self.ui.color(id!(color_view));
             color.restart_animation(cx);
+        }
+
+        if self.ui.link_label(id!(fuzzy_blur_button.label)).pressed(&actions) ||
+            self.ui.link_label(id!(gradient_blur_button.label)).pressed(&actions) {
+
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(only_image_nav),
+                cx
+            );
         }
     }
 }
