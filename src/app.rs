@@ -12,6 +12,7 @@ use crate::component_blur::BlurBitmapTextItemWidgetRefExt;
 use crate::component_shadow::ComponentShadowItemSetWidgetRefExt;
 use crate::complex_shadow::ComplexShadowItemWidgetRefExt;
 use crate::color::ColorWidgetRefExt;
+use crate::component_stroke::ComponentStrokeItemSetWidgetRefExt;
 
 live_design! {
     import makepad_widgets::base::*;
@@ -27,6 +28,7 @@ live_design! {
     import crate::full_blur::FullBlur;
     import crate::component_shadow::ComponentShadow;
     import crate::complex_shadow::ComplexShadow;
+    import crate::component_stroke::ComponentStroke;
     import crate::stack_navigation::*;
 
     import makepad_draw::shader::std::*;
@@ -113,7 +115,7 @@ live_design! {
                             
                             <Row> {
                                 color_button = <Cell> {label = {text: " 背景取色?\n BG Color"}}
-                                <Cell> {label = {text: " 控件描边\n Component\n Stroke"}}
+                                component_stroke_button = <Cell> {label = {text: " 控件描边\n Component\n Stroke"}}
                                 <EmptyCell> {}
                                 <EmptyCell> {}
                             }
@@ -252,6 +254,17 @@ live_design! {
                             }
                         }}}
                     }
+
+                    component_stroke_nav = <StackNavigationView> {
+                        header = { content = { title_container = {
+                            title = {
+                                text: "Component Stroke"
+                            }
+                        }}}
+                        body = {
+                            component_stroke_view = <ComponentStroke> {}
+                        }
+                    }
                 }
             }
         }
@@ -283,6 +296,7 @@ impl LiveRegister for App {
         crate::component_shadow::live_design(cx);
         crate::complex_shadow::live_design(cx);
         crate::color::live_design(cx);
+        crate::component_stroke::live_design(cx);
     }
 }
 
@@ -442,6 +456,20 @@ impl MatchEvent for App{
                 live_id!(only_image_nav),
                 cx
             );
+        }
+
+        if self.ui.link_label(id!(component_stroke_button.label)).pressed(&actions) {
+            let mut navigation = self.ui.stack_navigation(id!(navigation));
+            navigation.show_stack_view_by_id(
+                live_id!(component_stroke_nav),
+                cx
+            );
+
+            let component_stroke_view = self.ui.view(id!(component_stroke_view));
+            let mut animated_items = component_stroke_view.component_stroke_item_set(
+                ids!(component_stroke_item)
+            );
+            animated_items.restart_animation(cx);
         }
     }
 }

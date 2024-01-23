@@ -15,3 +15,4 @@ mod component_blur;
 mod component_shadow;
 mod complex_shadow;
 mod color;
+mod component_stroke;

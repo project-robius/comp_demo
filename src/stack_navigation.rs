@@ -244,8 +244,16 @@ pub struct StackNavigation {
 }
 
 impl LiveHook for StackNavigation {
-    fn after_new_from_doc(&mut self, _cx: &mut Cx) {
-        self.active_stack_view = ActiveStackView::None;
+    fn after_apply_from(&mut self, cx: &mut Cx, apply: &mut Apply) {
+        if apply.from.is_new_from_doc() {
+            self.active_stack_view = ActiveStackView::None;
+        } else {
+            if let ActiveStackView::Active(stack_view_id) = self.active_stack_view {
+                // Make sure current stack view is visible when code reloads
+                let stack_view_ref = self.stack_navigation_view(&[stack_view_id]);
+                stack_view_ref.apply_over(cx, live! {visible: true, offset: 0.0});
+            }
+        }
     }
 }
 
@@ -263,6 +271,8 @@ impl Widget for StackNavigation {
         DrawStep::done()
     }
 }
+
+
 
 impl WidgetNode for StackNavigation {
     fn walk(&mut self, cx:&mut Cx) -> Walk{
