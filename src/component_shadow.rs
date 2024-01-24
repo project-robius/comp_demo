@@ -46,13 +46,13 @@ live_design! {
                     step1 = <BlurStage>{
                         width: Fill,
                         height: Fill,
-    
+
                         draw_bg:{blury: -7.07, blurx: 7.07, blursize: (SHADOW_BLUR_SIZE), blurstd: (SHADOW_BLUR_STD)}
-                        
+
                         align: {x: 0.5, y: 0.5}
                         shadow = <RoundedView> {
-                            width: 60,
-                            height: 60,
+                            width: 65,
+                            height: 65,
 
                             draw_bg: {
                                 radius: 10.0
@@ -66,8 +66,8 @@ live_design! {
 
         image = <Image> {
             source: (IMG_0),
-            width: 60.0,
-            height: 60.0,
+            width: 75.0,
+            height: 75.0,
 
             draw_bg: {
                 instance radius: 10.0
@@ -147,13 +147,13 @@ live_design! {
     //                 let center = (lower + upper) * 0.5;
     //                 let halfSize = (upper - lower) * 0.5;
     //                 point -= center;
-                
+
     //                 // The signal is only non-zero in a limited range, so don't waste samples
     //                 let low = point.y - halfSize.y;
     //                 let high = point.y + halfSize.y;
     //                 let start = clamp(-3.0 * sigma, low, high);
     //                 let end = clamp(3.0 * sigma, low, high);
-                
+
     //                 // Accumulate samples (we can get away with surprisingly few samples)
     //                 let step = (end - start) / 4.0;
     //                 let y = start + step * 0.5;
@@ -170,11 +170,11 @@ live_design! {
 
     //                 value += roundedBoxShadowX(point.x, point.y - y, sigma, corner, halfSize) * gaussian(y, sigma) * step;
     //                 y += step;
-                
+
     //                 return value;
     //             }
 
-                
+
     //             fn pixel(self) -> vec4 {
     //                 // let sdf = Sdf2d::viewport(self.pos * self.rect_size);
     //                 // sdf.box(
@@ -208,7 +208,7 @@ live_design! {
     //                 ));
     //             }
     //         },
-        
+
     //         image = <Image> {
     //             source: (IMG_0),
     //             width: 60.0,
@@ -266,7 +266,7 @@ live_design! {
         height: Fit
 
         <Cell> { component_shadow_item = { image = { source: (IMG_0) } }}
-        <Cell> { 
+        <Cell> {
             margin: { left: 85.0 }
             component_shadow_item = { image = { source: (IMG_1) } }
         }
@@ -286,7 +286,7 @@ live_design! {
         height: Fit
 
         <Cell> { component_shadow_item = { image = { source: (IMG_4) } }}
-        <Cell> { 
+        <Cell> {
             margin: { left: 85.0 }
             component_shadow_item = { image = { source: (IMG_5) } }
         }
@@ -306,7 +306,7 @@ live_design! {
         height: Fit
 
         <Cell> { component_shadow_item = { image = { source: (IMG_8) } }}
-        <Cell> { 
+        <Cell> {
             margin: { left: 85.0 }
             component_shadow_item = { image = { source: (IMG_9) } }
         }
@@ -327,17 +327,17 @@ live_design! {
         height: Fit
 
         <Row1> {}
-        <Row2> { margin: { top: 85.0 }}
-        <Row3> { margin: { top: 170.0 }}
+        <Row2> { margin: { top: 82.0 }}
+        <Row3> { margin: { top: 164.0 }}
 
-        <Row1> { margin: { top: 255.0 }}
-        <Row2> { margin: { top: 340.0 }}
-        <Row3> { margin: { top: 425.0 }}
+        <Row1> { margin: { top: 246.0 }}
+        <Row2> { margin: { top: 328.0 }}
+        <Row3> { margin: { top: 410.0 }}
 
-        <Row1> { margin: { top: 510.0 }}
-        <Row2> { margin: { top: 595.0 }}
-        <Row3> { margin: { top: 680.0 }}
-        
+        <Row1> { margin: { top: 492.0 }}
+        <Row2> { margin: { top: 574.0 }}
+        <Row3> { margin: { top: 656.0 }}
+
         padding: 5.0
     }
 

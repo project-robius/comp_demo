@@ -25,8 +25,8 @@ live_design! {
 
         element = <Image> {
             source: (IMG_0),
-            width: 60.0,
-            height: 60.0,
+            width: 75.0,
+            height: 75.0,
 
             draw_bg: {
                 instance radius: 0.0
@@ -74,7 +74,7 @@ live_design! {
 
     Row1 = <View> {
         flow: Right
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
 
@@ -86,7 +86,7 @@ live_design! {
 
     Row2 = <View> {
         flow: Right
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
 
@@ -98,7 +98,7 @@ live_design! {
 
     Row3 = <View> {
         flow: Right
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
 
@@ -110,10 +110,10 @@ live_design! {
 
     Grid = <View> {
         flow: Down
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
-        
+
         padding: 5.0
     }
 
@@ -122,7 +122,7 @@ live_design! {
         height: Fill,
         flow: Down
 
-        padding: 20.0
+        padding: 25.0
 
         <Grid> {
             <Row1> {}

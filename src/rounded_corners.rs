@@ -10,10 +10,10 @@ live_design! {
         height: Fit
 
         element = <RoundedView> {
-            width: 60.0,
-            height: 60.0,
+            width: 75.0,
+            height: 75.0,
             draw_bg: {
-                color: #4f6,
+                color: #30c04f
                 radius: 10.0
             }
         }
@@ -47,7 +47,7 @@ live_design! {
 
     Row = <View> {
         flow: Right
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
 
@@ -59,10 +59,10 @@ live_design! {
 
     Grid = <View> {
         flow: Down
-        spacing: 15.0
+        spacing: 10.0
         width: Fill
         height: Fit
-        
+
         padding: 5.0
     }
 

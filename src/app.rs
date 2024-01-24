@@ -37,7 +37,7 @@ live_design! {
     Cell = <View> {
         flow: Down
         height: Fit
-        
+
         label = <LinkLabel> {
             width: Fill,
             height: Fit,
@@ -45,11 +45,11 @@ live_design! {
             draw_text: {
                 wrap: Word,
                 text_style: {
-                    font_size: 11.0,
+                    font_size: 13.0,
                 }
 
                 fn get_color(self) -> vec4 {
-                    return #1E90FF
+                    return #006fff
                 }
             }
         }
@@ -62,15 +62,15 @@ live_design! {
 
     Row = <View> {
         flow: Right
-        spacing: 15.0
+        spacing: 10.0
         height: 80.0
     }
 
     Grid = <View> {
         flow: Down
-        spacing: 15.0
+        spacing: 10.0
         height: Fit
-        
+
         padding: 5.0
     }
 
@@ -88,39 +88,39 @@ live_design! {
                     root_view = {
                         width: Fill, height: Fill
                         flow: Down
-                        
+
                         <View> { width: Fill, height: Fill }
-                        
+
                         <Grid> {
                             <Row> {
-                                rounded_corner_button = <Cell> {label = {text: " 圆角矩形\n Rounded\n Corner"}}
-                                rounded_images_button = <Cell> {label = {text: " 位图图片\n Bitmap\n Image"}}
-                                bitmap_text_button = <Cell> {label = {text: " 点阵文字\n Bitmap Text"}}
-                                vector_text_button = <Cell> {label = {text: " 矢量文字\n Vector Text"}}
+                                rounded_corner_button = <Cell> {label = {text: "圆角矩形\nRounded\nCorner"}}
+                                rounded_images_button = <Cell> {label = {text: "位图图片\nBitmap\nImage"}}
+                                bitmap_text_button = <Cell> {label = {text: "点阵文字\nBitmap Text"}}
+                                vector_text_button = <Cell> {label = {text: "矢量文字\nVector Text"}}
                             }
-                            
+
                             <Row> {
-                                <Cell> {label = {text: " 矢量图片\n Vector\n Image"}}
-                                full_blur_button = <Cell> {label = {text: " 全屏模糊\n Full Blur"}}
-                                component_blur_button = <Cell> {label = {text: " 控件模糊\n Component\n Blur"}}
-                                transparency_button = <Cell> {label = {text: " 毛玻璃效果\n Trans-\n parency"}}
+                                <Cell> {label = {text: "矢量图片\nVector\nImage"}}
+                                full_blur_button = <Cell> {label = {text: "全屏模糊\nFull Blur"}}
+                                component_blur_button = <Cell> {label = {text: "控件模糊\nComponent\nBlur"}}
+                                transparency_button = <Cell> {label = {text: "毛玻璃效果\nTrans-\nparency"}}
                             }
-                            
+
                             <Row> {
-                                fuzzy_blur_button = <Cell> {label = {text: " 模糊穿透?\n Fuzzy Blur"}}
-                                gradient_blur_button = <Cell> {label = {text: " 渐变模糊?\n Gradient\n Blur"}}
-                                component_shadow_button = <Cell> {label = {text: " 控件阴影\n Component\n Shadow"}}
-                                complex_shadow_button = <Cell> {label = {text: " 复杂阴影\n Complex\n Shadow"}}
+                                fuzzy_blur_button = <Cell> {label = {text: "模糊穿透?\nFuzzy Blur"}}
+                                gradient_blur_button = <Cell> {label = {text: "渐变模糊?\nGradient\nBlur"}}
+                                component_shadow_button = <Cell> {label = {text: "控件阴影\nComponent\nShadow"}}
+                                complex_shadow_button = <Cell> {label = {text: "复杂阴影\nComplex\nShadow"}}
                             }
-                            
+
                             <Row> {
-                                color_button = <Cell> {label = {text: " 背景取色?\n BG Color"}}
-                                component_stroke_button = <Cell> {label = {text: " 控件描边\n Component\n Stroke"}}
+                                color_button = <Cell> {label = {text: "背景取色?\nBG Color"}}
+                                component_stroke_button = <Cell> {label = {text: "控件描边\nComponent\nStroke"}}
                                 <EmptyCell> {}
                                 <EmptyCell> {}
                             }
                         }
-                        
+
                         <View> { width: Fill, height: Fill }
                     }
 
@@ -175,7 +175,7 @@ live_design! {
                                 text: "Transparency"
                                 draw_text: {
                                     color: #fff
-                                } 
+                                }
                             }
                         }}}
                         body = {
