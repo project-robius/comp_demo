@@ -1,6 +1,5 @@
 use makepad_widgets::*;
 
-use crate::stack_navigation::StackNavigationWidgetRefExt;
 use crate::blur_image::{BlurImageWidgetRefExt, BlurImageSetWidgetRefExt};
 
 use crate::rounded_corners::RoundedCornersItemSetWidgetRefExt;
@@ -29,10 +28,9 @@ live_design! {
     import crate::component_shadow::ComponentShadow;
     import crate::complex_shadow::ComplexShadow;
     import crate::component_stroke::ComponentStroke;
-    import crate::stack_navigation::*;
 
     import makepad_draw::shader::std::*;
-    IMG_0 = dep("crate://self/resources/images/0.png")
+    IMG_BACKGROUND = dep("crate://self/resources/images/bg.jpg");
 
     Cell = <View> {
         flow: Down
@@ -40,7 +38,7 @@ live_design! {
 
         label = <LinkLabel> {
             width: Fill,
-            height: Fit,
+            height: 300.,
             text: "Hello",
             draw_text: {
                 wrap: Word,
@@ -72,6 +70,12 @@ live_design! {
         height: Fit
 
         padding: 5.0
+    }
+
+    DemoStackNavigationView = <StackNavigationView> {
+        header = {
+            show_bg: false,
+        }
     }
 
     App = {{App}} {
@@ -124,7 +128,7 @@ live_design! {
                         <View> { width: Fill, height: Fill }
                     }
 
-                    rounded_corners_nav = <StackNavigationView> {
+                    rounded_corners_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Rounded Corners"
@@ -135,7 +139,7 @@ live_design! {
                         }
                     }
 
-                    rounded_images_nav = <StackNavigationView> {
+                    rounded_images_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Bitmap Images"
@@ -146,7 +150,7 @@ live_design! {
                         }
                     }
 
-                    bitmap_text_nav = <StackNavigationView> {
+                    bitmap_text_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Bitmap Text"
@@ -157,7 +161,7 @@ live_design! {
                         }
                     }
 
-                    vector_text_nav = <StackNavigationView> {
+                    vector_text_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Vector Text"
@@ -168,8 +172,15 @@ live_design! {
                         }
                     }
 
-                    transparency_nav = <StackNavigationView> {
-                        background = { draw_bg: {opacity: 1.0}}
+                    transparency_nav = <DemoStackNavigationView> {
+                        background = {
+                            visible: true,
+                            <Image> {
+                                source: (IMG_BACKGROUND),
+                                width: Fill,
+                                height: Fill,
+                            }
+                        }
                         header = { content = { title_container = {
                             title = {
                                 text: "Transparency"
@@ -183,34 +194,44 @@ live_design! {
                         }
                     }
 
-                    color_nav = <StackNavigationView> {
+                    color_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
-                            title = {
-                                text: "BG Color"
-                            }
+                                title = {
+                                    text: "BG Color"
+                                }
                         }}}
                         body = {
                             color_view = <Color> {}
                         }
                     }
 
-                    full_blur_nav = <StackNavigationView> {
-                        header = { content = { title_container = {
-                            title = {
-                                text: "Full Blur",
-                                draw_text: {
-                                    color: #fff
+                    full_blur_nav = <DemoStackNavigationView> {
+                        header = {
+                            show_bg: false,
+                            content = { title_container = {
+                                title = {
+                                    text: "Full Blur",
+                                    draw_text: {
+                                        color: #fff
+                                    }
                                 }
-                            }
-                        }}}
+                            }}
+                        }
                         body = {
-                            margin: 0.0
+                            margin: { top: 0.0 }
                             full_blur_view = <FullBlur> {}
                         }
                     }
 
-                    component_blur_nav = <StackNavigationView> {
-                        background = { draw_bg: {opacity: 1.0}}
+                    component_blur_nav = <DemoStackNavigationView> {
+                        background = {
+                            visible: true,
+                            <Image> {
+                                source: (IMG_BACKGROUND),
+                                width: Fill,
+                                height: Fill,
+                            }
+                        }
                         header = { content = { title_container = {
                             title = {
                                 text: "Component Blur",
@@ -224,7 +245,7 @@ live_design! {
                         }
                     }
 
-                    component_shadow_nav = <StackNavigationView> {
+                    component_shadow_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Component Shadow"
@@ -235,7 +256,7 @@ live_design! {
                         }
                     }
 
-                    complex_shadow_nav = <StackNavigationView> {
+                    complex_shadow_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Complex Shadow"
@@ -246,8 +267,15 @@ live_design! {
                         }
                     }
 
-                    only_image_nav = <StackNavigationView> {
-                        background = { draw_bg: {opacity: 1.0}}
+                    only_image_nav = <DemoStackNavigationView> {
+                        background = {
+                            visible: true,
+                            <Image> {
+                                source: (IMG_BACKGROUND),
+                                width: Fill,
+                                height: Fill,
+                            }
+                        }
                         header = { content = { title_container = {
                             title = {
                                 text: " ",
@@ -255,7 +283,7 @@ live_design! {
                         }}}
                     }
 
-                    component_stroke_nav = <StackNavigationView> {
+                    component_stroke_nav = <DemoStackNavigationView> {
                         header = { content = { title_container = {
                             title = {
                                 text: "Component Stroke"
@@ -283,7 +311,6 @@ impl LiveRegister for App {
     fn live_register(cx: &mut Cx) {
         makepad_widgets::live_design(cx);
 
-        crate::stack_navigation::live_design(cx);
         crate::blur_image::live_design(cx);
 
         crate::rounded_corners::live_design(cx);

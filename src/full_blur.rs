@@ -36,13 +36,13 @@ live_design! {
                         from: {all: Snap}
                         apply: {
                             step4 = {
-                                draw_bg: {blursize: 0.2}
+                                draw_bg: {blursize: 0.05}
                                 step3 = {
-                                    draw_bg: {blursize: 0.2}
+                                    draw_bg: {blursize: 0.05}
                                     step2 = {
-                                        draw_bg: {blursize: 0.2}
+                                        draw_bg: {blursize: 0.05}
                                         step1 = {
-                                            draw_bg: {blursize: 0.2}
+                                            draw_bg: {blursize: 0.05}
                                         }
                                     }
                                 }

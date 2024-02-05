@@ -20,7 +20,7 @@ live_design! {
     IMG_10 = dep("crate://self/resources/images/10.png")
     IMG_11 = dep("crate://self/resources/images/11.png")
 
-    SHADOW_BLUR_SIZE = 3.0
+    SHADOW_BLUR_SIZE = 5.0
     SHADOW_BLUR_STD = 1.5
 
     ComponentShadowItem = {{ComponentShadowItem}} {

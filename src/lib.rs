@@ -1,7 +1,6 @@
 pub mod app;
 
 // Shared widgets
-mod stack_navigation;
 mod blur_image;
 
 // Sections
