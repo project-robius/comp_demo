@@ -57,7 +57,7 @@ live_design! {
                     from: {all: BounceLoop {duration: 1.0, end: 1.0}}
                     apply: {
                         element = {
-                            draw_bg: { image_scale: 0.5 }
+                            draw_bg: { image_scale: 1.0 }
                             margin: {left: 94.0, top: 30.0}
                         }
                     }
@@ -66,7 +66,7 @@ live_design! {
                     from: {all: Snap}
                     apply: {
                         element = {
-                            draw_bg: { image_scale: 0.45 }
+                            draw_bg: { image_scale: 0.9 }
                             margin: {left: 80.0, top: 20.0}
                         }
                     }
