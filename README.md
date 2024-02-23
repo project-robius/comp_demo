@@ -1,4 +1,4 @@
-# comp_demo
+# makepad_comp_demo
 
 Demonstration of various animation techniques in Makepad, as compared to Swift UI
 
@@ -25,10 +25,10 @@ cargo install --path ./tools/cargo_makepad
 
 ## 2. Get Project
 
-### Clone the comp_demo repo
+### Clone the makepad_comp_demo repo
 
 ```bash
-git clone https://github.com/project-robius/comp_demo
+git clone https://github.com/project-robius/makepad_comp_demo
 ```
 
 ## 3. iOS Setup & Install
@@ -87,13 +87,13 @@ For this example, we have the Bundle Identifier of **`rs.robius.compdemo`**
 ### Install app on IOS simulator
 
 ```bash
-cd ~/comp_demo
-cargo makepad apple ios --org=rs.robius --app=compdemo run-sim -p comp_demo --release
+cd ~/makepad_comp_demo
+cargo makepad apple ios --org=rs.robius --app=compdemo run-sim -p makepad_comp_demo --release
 ```
 
 ### Install app on IOS device
 
 ```bash
-cd ~/comp_demo
-cargo makepad apple ios --ios-version=16 --org-id=<ORGIDVALUE> --org=rs.robius --app=compdemo run-device -p comp_demo --release
+cd ~/makepad_comp_demo
+cargo makepad apple ios --ios-version=16 --org-id=<ORGIDVALUE> --org=rs.robius --app=compdemo run-device -p makepad_comp_demo --release
 ```

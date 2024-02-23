@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 
 live_design! {
@@ -26,7 +25,7 @@ live_design! {
                     fn get_color(self) -> vec4 {
                         return #111
                     }
-                } 
+                }
             }
         }
 

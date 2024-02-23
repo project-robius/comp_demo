@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 use rand::Rng;
 
@@ -39,7 +38,7 @@ live_design! {
                     text_style: {
                         font_size: 12.0
                     }
-                } 
+                }
             }
 
             green_label = <Label> {
@@ -50,7 +49,7 @@ live_design! {
                     text_style: {
                         font_size: 12.0
                     }
-                } 
+                }
             }
 
             blue_label = <Label> {
@@ -61,7 +60,7 @@ live_design! {
                     text_style: {
                         font_size: 12.0
                     }
-                } 
+                }
             }
         }
 
@@ -69,7 +68,7 @@ live_design! {
             width: 80.0,
 
             text: "切换图片",
-            
+
             draw_text: {
                 fn get_color(self) -> vec4 {
                     return #1E90FF
@@ -85,10 +84,10 @@ live_design! {
                         self.rect_size.x - 2.0,
                         self.rect_size.y - 2.0
                     );
-                    
+
                     sdf.fill_keep(#fff);
                     sdf.stroke(#000, 1.0);
-                    
+
                     return sdf.result
                 }
             }

@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 
 live_design! {
@@ -44,7 +43,7 @@ live_design! {
                                 text_style: <FONT_LABEL> {
                                     font_size: 12
                                 }
-            
+
                                 fn get_color(self) -> vec4 {
                                     return #FFFFFF
                                 }

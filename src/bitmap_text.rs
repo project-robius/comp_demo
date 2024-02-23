@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 
 live_design! {
@@ -22,9 +21,9 @@ live_design! {
             height: Fill,
 
             draw_bg: {
-                // Note: we can not use `scale` because it is a varying in the overriden vertex shader. 
+                // Note: we can not use `scale` because it is a varying in the overriden vertex shader.
                 instance image_scale: 1.0
-                
+
                 fn vertex(self) -> vec4 {
                     return self.clip_and_transform_vertex(self.rect_pos, self.rect_size)
                 }
@@ -45,7 +44,7 @@ live_design! {
                     fn get_color(self) -> vec4 {
                         return #111
                     }
-                } 
+                }
             }
         }
 

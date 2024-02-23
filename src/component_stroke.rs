@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 
 live_design! {
@@ -99,7 +98,7 @@ live_design! {
         spacing: 15.0
         width: Fill
         height: Fit
-        
+
         padding: 5.0
     }
 

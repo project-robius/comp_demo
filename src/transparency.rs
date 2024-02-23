@@ -1,4 +1,3 @@
-use makepad_widgets::widget::WidgetCache;
 use makepad_widgets::*;
 
 live_design! {
@@ -24,7 +23,7 @@ live_design! {
                 text_style: {
                     font_size: 12.0
                 }
-            } 
+            }
         }
         <View> { width: Fill, height: 1.0 }
     }
