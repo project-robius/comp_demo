@@ -31,12 +31,12 @@ live_design! {
         align: {x: 0.5, y: 0.5}
 
         shadow = <RoundedView> {
-            width: 90,
-            height: 90,
+            width: 85,
+            height: 85,
 
             draw_bg: {
                 radius: 10.0
-                color: #000
+                color: #333
 
                 fn pixel(self) -> vec4 {
                     let sdf = Sdf2d::viewport(self.pos * self.rect_size)
@@ -59,8 +59,8 @@ live_design! {
 
         image = <Image> {
             source: (IMG_0),
-            width: 75.0,
-            height: 75.0,
+            width: 70.0,
+            height: 70.0,
 
             draw_bg: {
                 instance radius: 10.0
@@ -93,8 +93,8 @@ live_design! {
                 init = {
                     from: {all: Snap}
                     apply: {
-                        image = { draw_bg: { radius: 3.0 } }
-                        shadow = { draw_bg: { radius: 3.0 } }
+                        image = { draw_bg: { radius: 5.0 } }
+                        shadow = { draw_bg: { radius: 5.0 } }
                     }
                 }
             }
@@ -115,15 +115,15 @@ live_design! {
 
         <Cell> { component_shadow_item = { image = { source: (IMG_0) } }}
         <Cell> {
-            margin: { left: 85.0 }
+            margin: { left: 95.0 }
             component_shadow_item = { image = { source: (IMG_1) } }
         }
         <Cell> {
-            margin: { left: 170.0 }
+            margin: { left: 190.0 }
             component_shadow_item = { image = { source: (IMG_2) } }
         }
         <Cell> {
-            margin: { left: 255.0 }
+            margin: { left: 285.0 }
             component_shadow_item = { image = { source: (IMG_3) } }
         }
     }
@@ -135,15 +135,15 @@ live_design! {
 
         <Cell> { component_shadow_item = { image = { source: (IMG_4) } }}
         <Cell> {
-            margin: { left: 85.0 }
+            margin: { left: 95.0 }
             component_shadow_item = { image = { source: (IMG_5) } }
         }
         <Cell> {
-            margin: { left: 170.0 }
+            margin: { left: 190.0 }
             component_shadow_item = { image = { source: (IMG_6) } }
         }
         <Cell> {
-            margin: { left: 255.0 }
+            margin: { left: 285.0 }
             component_shadow_item = { image = { source: (IMG_7) } }
         }
     }
@@ -155,15 +155,15 @@ live_design! {
 
         <Cell> { component_shadow_item = { image = { source: (IMG_8) } }}
         <Cell> {
-            margin: { left: 85.0 }
+            margin: { left: 95.0 }
             component_shadow_item = { image = { source: (IMG_9) } }
         }
         <Cell> {
-            margin: { left: 170.0 }
+            margin: { left: 190.0 }
             component_shadow_item = { image = { source: (IMG_10) } }
         }
         <Cell> {
-            margin: { left: 255.0 }
+            margin: { left: 285.0 }
             component_shadow_item = { image = { source: (IMG_11) } }
         }
     }
@@ -182,9 +182,9 @@ live_design! {
         <Row2> { margin: { top: 328.0 }}
         <Row3> { margin: { top: 410.0 }}
 
-        <Row1> { margin: { top: 492.0 }}
-        <Row2> { margin: { top: 574.0 }}
-        <Row3> { margin: { top: 656.0 }}
+        <Row1> { margin: { top: 488.0 }}
+        <Row2> { margin: { top: 566.0 }}
+        <Row3> { margin: { top: 644.0 }}
 
         padding: 5.0
     }
