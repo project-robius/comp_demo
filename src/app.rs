@@ -106,20 +106,20 @@ live_design! {
                             <Row> {
                                 <Cell> {label = {text: "矢量图片\nVector\nImage"}}
                                 full_blur_button = <Cell> {label = {text: "全屏模糊\nFull Blur"}}
-                                component_blur_button = <Cell> {label = {text: "控件模糊\nComponent\nBlur"}}
+                                component_blur_button = <Cell> {label = {text: "控件模糊\nControl\nBlur"}}
                                 transparency_button = <Cell> {label = {text: "毛玻璃效果\nTrans-\nparency"}}
                             }
 
                             <Row> {
                                 fuzzy_blur_button = <Cell> {label = {text: "模糊穿透?\nFuzzy Blur"}}
                                 gradient_blur_button = <Cell> {label = {text: "渐变模糊?\nGradient\nBlur"}}
-                                component_shadow_button = <Cell> {label = {text: "控件阴影\nComponent\nShadow"}}
-                                complex_shadow_button = <Cell> {label = {text: "复杂阴影\nComplex\nShadow"}}
+                                component_shadow_button = <Cell> {label = {text: "控件阴影\nControl\nShadow"}}
+                                complex_shadow_button = <Cell> {label = {text: "复杂阴影\nPath\nShadow"}}
                             }
 
                             <Row> {
                                 color_button = <Cell> {label = {text: "背景取色?\nBG Color"}}
-                                component_stroke_button = <Cell> {label = {text: "控件描边\nComponent\nStroke"}}
+                                component_stroke_button = <Cell> {label = {text: "控件描边\nControl\nStroke"}}
                                 <EmptyCell> {}
                                 <EmptyCell> {}
                             }

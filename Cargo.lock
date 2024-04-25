@@ -44,6 +44,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "jni-sys"
+version = "0.4.0"
+
+[[package]]
 name = "libc"
 version = "0.2.150"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -77,6 +81,7 @@ name = "makepad-draw"
 version = "0.6.0"
 dependencies = [
  "ab_glyph_rasterizer",
+ "makepad-html",
  "makepad-platform",
  "makepad-vector",
  "rustybuzz",
@@ -136,6 +141,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "makepad-markdown"
+version = "0.4.0"
+dependencies = [
+ "makepad-live-id",
+]
+
+[[package]]
 name = "makepad-math"
 version = "0.4.0"
 
@@ -165,6 +177,7 @@ version = "0.4.0"
 name = "makepad-platform"
 version = "0.6.0"
 dependencies = [
+ "jni-sys",
  "makepad-futures",
  "makepad-futures-legacy",
  "makepad-http",
@@ -172,6 +185,7 @@ dependencies = [
  "makepad-shader-compiler",
  "makepad-wasm-bridge",
  "makepad-windows",
+ "smallvec",
  "windows-targets",
 ]
 
@@ -204,6 +218,7 @@ dependencies = [
  "makepad-derive-widget",
  "makepad-draw",
  "makepad-html",
+ "makepad-markdown",
  "makepad-zune-jpeg",
  "makepad-zune-png",
 ]
@@ -318,9 +333,9 @@ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
 
 [[package]]
 name = "smallvec"
-version = "1.11.0"
+version = "1.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62bb4feee49fdd9f707ef802e22365a35de4b7b299de4763d44bfea899442ff9"
+checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
 name = "ttf-parser"
