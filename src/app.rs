@@ -10,7 +10,6 @@ use crate::transparency::TransparencyWidgetRefExt;
 use crate::component_blur::BlurBitmapTextItemWidgetRefExt;
 use crate::component_shadow::ComponentShadowItemSetWidgetRefExt;
 use crate::complex_shadow::ComplexShadowItemWidgetRefExt;
-use crate::color::ColorWidgetRefExt;
 use crate::component_stroke::ComponentStrokeItemSetWidgetRefExt;
 
 live_design! {
@@ -22,7 +21,6 @@ live_design! {
     import crate::bitmap_text::BitmapText;
     import crate::vector_text::VectorText;
     import crate::transparency::Transparency;
-    import crate::color::Color;
     import crate::component_blur::ComponentBlur;
     import crate::full_blur::FullBlur;
     import crate::component_shadow::ComponentShadow;
@@ -194,17 +192,6 @@ live_design! {
                         }
                     }
 
-                    color_nav = <DemoStackNavigationView> {
-                        header = { content = { title_container = {
-                                title = {
-                                    text: "BG Color"
-                                }
-                        }}}
-                        body = {
-                            color_view = <Color> {}
-                        }
-                    }
-
                     full_blur_nav = <DemoStackNavigationView> {
                         header = {
                             show_bg: false,
@@ -322,7 +309,6 @@ impl LiveRegister for App {
         crate::component_blur::live_design(cx);
         crate::component_shadow::live_design(cx);
         crate::complex_shadow::live_design(cx);
-        crate::color::live_design(cx);
         crate::component_stroke::live_design(cx);
     }
 }
@@ -462,17 +448,6 @@ impl MatchEvent for App{
                 id!(complex_shadow_item)
             );
             animated_item.restart_animation(cx);
-        }
-
-        if self.ui.link_label(id!(color_button.label)).pressed(&actions) {
-            let mut navigation = self.ui.stack_navigation(id!(navigation));
-            navigation.show_stack_view_by_id(
-                live_id!(color_nav),
-                cx
-            );
-
-            let mut color = self.ui.color(id!(color_view));
-            color.restart_animation(cx);
         }
 
         if self.ui.link_label(id!(fuzzy_blur_button.label)).pressed(&actions) ||

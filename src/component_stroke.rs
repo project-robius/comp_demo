@@ -38,13 +38,14 @@ live_design! {
                 }
             }
 
-            <RectView> {
+            <RoundedView> {
                 width: Fill,
                 height: Fill,
 
                 margin: 4.0,
 
                 draw_bg: {
+                    radius: 0.0
                     border_color: #f22,
                     border_width: 1.0
                     color: #0000
