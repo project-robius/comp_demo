@@ -179,14 +179,21 @@ live_design! {
                                 height: Fill,
                             }
                         }
-                        header = { content = { title_container = {
-                            title = {
-                                text: "Transparency"
-                                draw_text: {
-                                    color: #fff
+                        header = {
+                            show_bg: true,
+                            content = {
+                                title_container = {
+                                    margin: { top: -13, left: 30}
+                                    title = {
+                                        text: "Transparency",
+                                        draw_text: {
+                                            color: #fff
+                                        }
+                                    }
                                 }
                             }
-                        }}}
+                        }
+                        
                         body = {
                             transparency_view = <Transparency> {}
                         }
@@ -194,15 +201,18 @@ live_design! {
 
                     full_blur_nav = <DemoStackNavigationView> {
                         header = {
-                            show_bg: false,
-                            content = { title_container = {
-                                title = {
-                                    text: "Full Blur",
-                                    draw_text: {
-                                        color: #fff
+                            show_bg: true,
+                            content = {
+                                title_container = {
+                                    margin: { top: -13, left: 30}
+                                    title = {
+                                        text: "Full Blur",
+                                        draw_text: {
+                                            color: #fff
+                                        }
                                     }
                                 }
-                            }}
+                            }
                         }
                         body = {
                             margin: { top: 0.0 }
@@ -219,25 +229,40 @@ live_design! {
                                 height: Fill,
                             }
                         }
-                        header = { content = { title_container = {
-                            title = {
-                                text: "Component Blur",
-                                draw_text: {
-                                    color: #fff
+                        header = {
+                            show_bg: true,
+                            content = {
+                                title_container = {
+                                    margin: { top: -13, left: 30}
+                                    title = {
+                                        text: "Component Blur",
+                                        draw_text: {
+                                            color: #fff
+                                        }
+                                    }
                                 }
                             }
-                        }}}
+                        }
                         body = {
                             component_blur_view = <ComponentBlur> {}
                         }
                     }
 
                     component_shadow_nav = <DemoStackNavigationView> {
-                        header = { content = { title_container = {
-                            title = {
-                                text: "Component Shadow"
+                        header = {
+                            show_bg: true,
+                            content = {
+                                title_container = {
+                                    margin: { top: -13, left: 30}
+                                    title = {
+                                        text: "Component Shadow",
+                                        draw_text: {
+                                            color: #fff
+                                        }
+                                    }
+                                }
                             }
-                        }}}
+                        }
                         body = {
                             component_shadow_view = <ComponentShadow> {}
                         }
@@ -263,11 +288,19 @@ live_design! {
                                 height: Fill,
                             }
                         }
-                        header = { content = { title_container = {
-                            title = {
-                                text: " ",
+                        header = {
+                            show_bg: false,
+                            content = {
+                                title_container = {
+                                    title = {
+                                        text: "Title",
+                                        draw_text: {
+                                            color: #0000
+                                        }
+                                    }
+                                }
                             }
-                        }}}
+                        }
                     }
 
                     component_stroke_nav = <DemoStackNavigationView> {
