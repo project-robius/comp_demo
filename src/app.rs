@@ -73,6 +73,22 @@ live_design! {
     DemoStackNavigationView = <StackNavigationView> {
         header = {
             show_bg: false,
+            content = {
+                title_container = {
+                    title = {
+                        draw_text: {
+                            color: #3c3c3c
+                        }
+                    }
+                }
+                button_container = {
+                    left_button = {
+                        draw_icon: {
+                            color: #3c3c3c;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -178,12 +194,11 @@ live_design! {
                                 width: Fill,
                                 height: Fill,
                             }
-                        }
+                        }   
                         header = {
                             show_bg: true,
                             content = {
                                 title_container = {
-                                    margin: { top: -13, left: 30}
                                     title = {
                                         text: "Transparency",
                                         draw_text: {
@@ -204,11 +219,17 @@ live_design! {
                             show_bg: true,
                             content = {
                                 title_container = {
-                                    margin: { top: -13, left: 30}
                                     title = {
                                         text: "Full Blur",
                                         draw_text: {
                                             color: #fff
+                                        }
+                                    }
+                                }
+                                button_container = {
+                                    left_button = {
+                                        draw_icon: {
+                                            color: #fff;
                                         }
                                     }
                                 }
@@ -233,11 +254,17 @@ live_design! {
                             show_bg: true,
                             content = {
                                 title_container = {
-                                    margin: { top: -13, left: 30}
                                     title = {
                                         text: "Component Blur",
                                         draw_text: {
                                             color: #fff
+                                        }
+                                    }
+                                }
+                                button_container = {
+                                    left_button = {
+                                        draw_icon: {
+                                            color: #fff;
                                         }
                                     }
                                 }
@@ -253,11 +280,17 @@ live_design! {
                             show_bg: true,
                             content = {
                                 title_container = {
-                                    margin: { top: -13, left: 30}
                                     title = {
                                         text: "Component Shadow",
                                         draw_text: {
                                             color: #fff
+                                        }
+                                    }
+                                }
+                                button_container = {
+                                    left_button = {
+                                        draw_icon: {
+                                            color: #fff;
                                         }
                                     }
                                 }
@@ -296,6 +329,13 @@ live_design! {
                                         text: "Title",
                                         draw_text: {
                                             color: #0000
+                                        }
+                                    }
+                                }
+                                button_container = {
+                                    left_button = {
+                                        draw_icon: {
+                                            color: #fff;
                                         }
                                     }
                                 }

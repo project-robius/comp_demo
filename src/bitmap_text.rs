@@ -79,7 +79,7 @@ live_design! {
         height: Fill,
         flow: Down
 
-        padding: 5.0
+        padding: { top: 0, left: 5, right: 5, bottom: 5 }
 
         bitmap_text_item = <BitmapTextItem> {}
     }

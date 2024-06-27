@@ -194,7 +194,8 @@ live_design! {
         height: Fill,
         flow: Down
 
-        padding: { top: 20.0, left: 5.0 }
+        margin: { top: -10 }
+        padding: { top: 0, left: 5, right: 5, bottom: 0 }
 
         <Grid> {}
     }

@@ -35,8 +35,7 @@ live_design! {
         height: Fill,
         flow: Down
 
-        padding: 20.0
-        spacing: 5.0
+        padding: { top: 0, left: 20, right: 20, bottom: 20 }
 
         <Item> { label = { text: "THINMATERIAL" }, draw_bg: { color: #fff8 } }
         <Item> { label = { text: "THICKMATERIAL" }, draw_bg: { color: #fffc } }

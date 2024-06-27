@@ -121,7 +121,7 @@ live_design! {
         height: Fill,
         flow: Down
 
-        padding: 25.0
+        padding: { top: 0, left: 20, right: 20, bottom: 20 }
 
         <Grid> {
             <Row1> {}
