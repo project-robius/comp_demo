@@ -7,6 +7,7 @@ Demonstration of various animation techniques in Makepad, as compared to Swift U
 ### Clone the Makepad repository
 
 ```bash
+cd ~
 git clone git@github.com:makepad/makepad.git
 ```
 
@@ -19,8 +20,7 @@ git branch rik
 ### Install makepad subcommand for cargo
 
 ```bash
-cd ~/makepad
-cargo install --path ./tools/cargo_makepad
+cargo install --path ~/makepad/tools/cargo_makepad
 ```
 
 ## 2. Get Project
@@ -31,7 +31,26 @@ cargo install --path ./tools/cargo_makepad
 git clone https://github.com/project-robius/makepad_comp_demo
 ```
 
-## 3. iOS Setup & Install
+## 3. Android Build
+
+### Install Android toolchain (First time)
+
+```bash
+rustup toolchain install nightly
+cargo makepad android install-toolchain
+```
+
+### Install app on Android devivce or Android emulator
+
+Open either the Android emulator or connect to a real Android device
+use `adb` command to make sure there's a device connected properly
+
+```bash
+cd ~/makepad_comp_demo
+cargo makepad android run -p makepad_comp_demo --release
+```
+
+## 4. iOS Setup & Install
 
 ### Install IOS toolchain (First time)
 
@@ -58,12 +77,7 @@ For iOS, the process is slightly more complicated. The steps involved are:
 
 ### Makepad Install
 
-We will run the `cargo makepad apple ios` command, similar to Android build above, but there are some 3 to 4 additional parameters that need to be filled in:
-
-`--org-id`
-
-This is the `<string>` value of the ApplicationIdentifierPrefix `<key>` in the `**.mobileprovision` file located in the `~/Library/MobileDevice/Provisioning Profiles` directory.
-It should be a 10 digit alphanumeric value.
+We will run the `cargo makepad apple ios` command, similar to Android build above, but there are some 2 to 6 additional parameters that need to be filled in:
 
 `--org`
 
@@ -76,24 +90,75 @@ This is the same value used to setup the initial skeleton app above. For this ex
 The name of the application or the project. This is the same as the Product Name used to setup the initial skeleton app above. In this case:
 > `compdemo`
 
-`--ios-version` (optional)
-
-defaults to 17. Set it to 16 or other values if the device is not running iOS 17.
-
-### Example
-
-For this example, we have the Bundle Identifier of **`rs.robius.compdemo`**
-
 ### Install app on IOS simulator
 
 ```bash
 cd ~/makepad_comp_demo
-cargo makepad apple ios --org=rs.robius --app=compdemo run-sim -p makepad_comp_demo --release
+cargo makepad apple ios \
+  --org=rs.robius \
+  --app=compdemo \
+  run-sim -p makepad_comp_demo --release
 ```
 
 ### Install app on IOS device
 
+First run the following command:
+
+```bash
+cargo makepad apple list
+```
+
+This command will print out the list of all provisioning profiles, signing identities, and device identifiers on the current system. The user has to decide and choose the ones that he/she needs to use for each type. (If you get an error from the command, please follow the iOS Setup instructions above first.)
+
+Once decided, run the folloiwng command and fill in the **unique starting characters** chosen from the output.
+
 ```bash
 cd ~/makepad_comp_demo
-cargo makepad apple ios --ios-version=16 --org-id=<ORGIDVALUE> --org=rs.robius --app=compdemo run-device -p makepad_comp_demo --release
+cargo makepad apple ios \
+  --profile=unique-starting-hex-string \
+  --cert=UNIQUE_STARTING_HEX_STRING \
+  --device=UNIQUE-STARTING-HEX-STRING \
+  --org=rs.robius \
+  --app=makepad_comp_demo \
+  run-device -p makepad_comp_demo –release
 ```
+
+## 5. WASM Build
+
+Running the Makepad application as a WASM build is as simple as a single command. The script will automatically generate the necessary index.html and other files and also start a local webserver at port 8010.
+
+### Demo
+
+<https://wasm.robius.rs/makepad_comp_demo>
+
+### Install WASM toolchain (First time)
+
+```bash
+cargo makepad wasm install-toolchain
+```
+
+### Install app as WASM binary for browsers
+
+```bash
+cargo makepad wasm run -p makepad_comp_demo --release
+```
+
+After running the command below, just open your browser to <http://127.0.0.1:8010/> in order for the app to load and run.
+
+## 6. MacOS / PC
+
+Running on Desktop is the quickest way to try out an example app.
+
+```bash
+cd ~/makepad_comp_demo
+cargo run
+```
+
+or
+
+```bash
+cd ~/makepad_comp_demo
+cargo run -p makepad_comp_demo
+```
+
+And there should be a desktop application window now running (may need to click on the icon on MacOS's Dock to show it)
